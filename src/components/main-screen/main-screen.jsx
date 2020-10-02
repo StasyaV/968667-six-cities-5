@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 
 const MainScreen = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {offersCount} = props;
 
   return (
@@ -265,5 +265,8 @@ const MainScreen = (props) => {
   );
 };
 
+MainScreen.propTypes = {
+  offersCount: PropTypes.number.isRequired,
+};
 
 export default MainScreen;
