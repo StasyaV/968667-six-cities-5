@@ -1,7 +1,6 @@
 import {getRandomNumber} from "../utils/utils.js";
 import {cities, roomTypes} from "../const.js";
 
-const AVATAR_URL = `https://www.fillmurray.com/g/200/300`;
 const MAX_RATING_VALUE = 5;
 const MAX_COUNT_BEDROOMS = 5;
 const MAX_COUNT_GUESTS = 5;
@@ -19,15 +18,16 @@ const descriptionList = [
 ];
 const names = [`Ivan`, `Alex`, `Nick`, `Simon`, `Damon`, `Damien`, `Jan`];
 const features = [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`];
+const imgLinks = [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`];
 
 const generateFeaturesLength = () => {
   return getRandomNumber(1, 5);
 };
 
 const generateFeaturesList = () => {
-  let featuresList = ``;
+  let featuresList = [];
   for (let i = 0; i < generateFeaturesLength(); i++) {
-    featuresList += features[i];
+    featuresList.push(features[i]);
   }
   return featuresList;
 };
@@ -47,7 +47,7 @@ export const generateDate = () => {
 export const getComment = (value, index) => {
   const comment = {
     id: index,
-    avatar: `${AVATAR_URL}/${Math.random()}`,
+    avatar: `img/avatar-max.jpg`,
     author: names[getRandomNumber(0, names)],
     rating: getRandomNumber(0, MAX_RATING_VALUE),
     text: descriptionList[getRandomNumber(0, descriptionList.length)],
@@ -65,22 +65,22 @@ export const getOffer = (value, index) => {
   const offer = {
     id: index,
     city: cities[getRandomNumber(0, cities.length)],
-    name: `Hotel in ${index}`,
-    img: ``,
+    name: `Hotel - ${index}`,
+    img: imgLinks[getRandomNumber(0, imgLinks.length)],
+    detailedImages: (imgLinks > 6) ? imgLinks.slice(0, 6) : imgLinks,
     price: getRandomNumber(10, 100),
     roomType: roomTypes[getRandomNumber(0, roomTypes.length)],
     bedroomsCount: getRandomNumber(1, MAX_COUNT_BEDROOMS),
     guestsCount: getRandomNumber(1, MAX_COUNT_GUESTS),
     description: descriptionList[getRandomNumber(0, descriptionList.length)],
     comments,
-    raiting: getRandomNumber(0, MAX_RATING_VALUE),
     isFavorite: Boolean(getRandomNumber(0, 2)),
     isPopular: Boolean(getRandomNumber(0, 2)),
     isPremium: Boolean(getRandomNumber(0, 2)),
     features: generateFeaturesList(),
     owner: {
       name: names[getRandomNumber(0, names.length)],
-      avatar: `${AVATAR_URL}/${Math.random()}`,
+      avatar: `img/avatar-angelina.jpg`,
       isSUper: Boolean(getRandomNumber(0, 2))
     }
   };
