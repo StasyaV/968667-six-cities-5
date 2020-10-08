@@ -8,22 +8,22 @@ import OfferScreen from "../offer-screen/offer-screen";
 
 
 const App = (props) => {
-  const {offersCount} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen offersCount={offersCount} />
+          <MainScreen offers={offers}/>
         </Route>
         <Route exact path="/login">
           <LoginScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen />
+          <FavoritesScreen offers={offers} />
         </Route>
-        <Route exact path="/offer/:id?">
-          <OfferScreen />
+        <Route exact path="/offer/:id">
+          <OfferScreen offer={offers[0]} />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -31,7 +31,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
