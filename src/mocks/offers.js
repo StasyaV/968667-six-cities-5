@@ -19,7 +19,7 @@ const descriptionList = [
 const names = [`Ivan`, `Alex`, `Nick`, `Simon`, `Damon`, `Damien`, `Jan`];
 const features = [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`];
 const imgLinks = [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`];
-const coordinatesList = [`52.3909553943508, 4.85309666406198`, `52.369553943508, 4.85309666406198`, `52.3909553943508, 4.929309666406198`, `52.3809553943508, 4.939309666406198`];
+const coordinatesList = [[52.3909553943508, 4.85309666406198], [52.369553943508, 4.85309666406198], [52.3909553943508, 4.929309666406198], [52.3809553943508, 4.939309666406198]];
 
 const generateFeaturesLength = () => {
   return getRandomNumber(1, 5);
