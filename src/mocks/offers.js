@@ -1,5 +1,5 @@
 import {getRandomNumber} from "../utils/utils.js";
-import {cities, roomTypes} from "../const.js";
+import {roomTypes} from "../const.js";
 
 const MAX_RATING_VALUE = 5;
 const MAX_COUNT_BEDROOMS = 5;
@@ -19,6 +19,7 @@ const descriptionList = [
 const names = [`Ivan`, `Alex`, `Nick`, `Simon`, `Damon`, `Damien`, `Jan`];
 const features = [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`];
 const imgLinks = [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`];
+const coordinatesList = [`52.3909553943508, 4.85309666406198`, `52.369553943508, 4.85309666406198`, `52.3909553943508, 4.929309666406198`, `52.3809553943508, 4.939309666406198`];
 
 const generateFeaturesLength = () => {
   return getRandomNumber(1, 5);
@@ -64,7 +65,8 @@ export const getOffer = (value, index) => {
   const comments = generateComments();
   const offer = {
     id: index,
-    city: cities[getRandomNumber(0, cities.length)],
+    city: `Amsterdam`,
+    coordinates: coordinatesList[index],
     name: `Hotel - ${index}`,
     img: imgLinks[getRandomNumber(0, imgLinks.length)],
     detailedImages: (imgLinks > 6) ? imgLinks.slice(0, 6) : imgLinks,
