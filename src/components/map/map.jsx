@@ -33,8 +33,7 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    coordinatesList.forEach((coordinates) => {
-      console.log(coordinates);
+    coordinatesList.forEach((coordinates) => { 
       leaflet
         .marker(coordinates, {icon})
         .addTo(map);
