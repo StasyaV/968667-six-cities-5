@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app";
 import {getOffer} from "./mocks/offers";
 
-const renderOfferCards = 10;
+const renderOfferCards = 4;
 
 const offerCards = new Array(renderOfferCards).fill().map(getOffer);
 
