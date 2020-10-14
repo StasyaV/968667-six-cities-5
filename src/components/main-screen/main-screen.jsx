@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import OfferList from "../offerList/offerList";
 import Map from "../map/map";
 
-
 const MainScreen = (props) => {
   const {offers} = props;
 
@@ -105,7 +104,7 @@ const MainScreen = (props) => {
                 <OfferList offers={offers}/>
               </section>
               <div className="cities__right-section">
-                <Map offers={offers}/>
+                <Map offers={offers} mapClass={`cities__map map`} />
               </div>
             </div>
           }
