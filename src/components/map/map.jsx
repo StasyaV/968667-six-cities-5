@@ -5,9 +5,9 @@ import leaflet from 'leaflet';
 const CITY_COORDINATES = [52.38333, 4.9];
 
 class Map extends PureComponent {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     const {offers} = this.props;
@@ -42,14 +42,16 @@ class Map extends PureComponent {
 
 
   render() {
+    const {mapClass} = this.props;
     return (
-      <section id="map" className="cities__map map"></section>
+      <section id="map" className={mapClass}></section>
     );
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
+  mapClass: PropTypes.string.isRequired,
 };
 
 export default Map;
