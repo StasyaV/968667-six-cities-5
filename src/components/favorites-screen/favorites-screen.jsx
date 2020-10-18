@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from 'react-redux';
 
 const FavoritesScreen = (props) => {
   const {offers} = props;
@@ -79,5 +80,11 @@ FavoritesScreen.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-export default FavoritesScreen;
+const mapStateToProps = (({city, offers}) => ({
+  city,
+  offers
+}));
+
+export {FavoritesScreen};
+export default connect(mapStateToProps)(FavoritesScreen);
 
