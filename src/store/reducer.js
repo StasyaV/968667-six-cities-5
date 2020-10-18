@@ -1,17 +1,16 @@
 import {getOffer} from "../mocks/offers";
-import {extend, getOffersByCity} from "../utils/utils";
+import {extend} from "../utils/utils";
 import {ActionType} from "./action";
 import {cities, City} from "../const";
 
 const renderOfferCards = 4;
 
 const offerCards = new Array(renderOfferCards).fill().map(getOffer);
-const defaultOffers = getOffersByCity(offerCards, City.AMSTERDAM);
 
 const initialState = {
   cities,
   city: City.AMSTERDAM,
-  offers: defaultOffers
+  offers: offerCards
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +21,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.UPDATE_OFFERS:
       return extend(state, {
-        offers: getOffersByCity(offerCards, state.city)
+        offers: offerCards
       });
   }
   return state;

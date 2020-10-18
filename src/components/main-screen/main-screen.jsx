@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import OfferList from "../offerList/offerList";
 import Map from "../map/map";
 import CitiesList from "../citiesList/citiesList";
+import NoOffersScreen from "../no-offers-screen/no-offers-screen";
+import {getOffersByCity} from "../../utils/utils";
 
 const MainScreen = (props) => {
   const {offers, cities, city} = props;
@@ -32,27 +34,17 @@ const MainScreen = (props) => {
           </div>
         </div>
       </header>
-      <main className={`${offers.length > 0 ? `page__main page__main--index` : `page__main page__main--index-empty`}`}>
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <CitiesList cities={cities} currentCity={city} />
-          </section>
-        </div>
-        <div className="cities">
-          {offers.length === 0 ?
-            <div className="cities">
-              <div className="cities__places-container cities__places-container--empty container">
-                <section className="cities__no-places">
-                  <div className="cities__status-wrapper tabs__content">
-                    <b className="cities__status">No places to stay available</b>
-                    <p className="cities__status-description">We could not find any property available at the moment in {city}</p>
-                  </div>
-                </section>
-                <div className="cities__right-section"></div>
-              </div>
-            </div>
-            :
+      {offers.length === 0 ?
+        <NoOffersScreen cities={cities} city={city} />
+        :
+        <main className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <section className="locations container">
+              <CitiesList cities={cities} currentCity={city} />
+            </section>
+          </div>
+          <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -78,9 +70,9 @@ const MainScreen = (props) => {
                 <Map offers={offers} mapClass={`cities__map map`} />
               </div>
             </div>
-          }
-        </div>
-      </main>
+          </div>
+        </main>
+      }
     </div>
   );
 };
@@ -93,7 +85,7 @@ MainScreen.propTypes = {
 
 const mapStateToProps = (({city, offers, cities}) => ({
   city,
-  offers,
+  offers: getOffersByCity(offers, city),
   cities
 }));
 
