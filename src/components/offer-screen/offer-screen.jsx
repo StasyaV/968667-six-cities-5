@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from 'react-redux';
 import CommentList from "../comment-list/comment-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferList from "../offerList/offerList";
@@ -8,6 +9,7 @@ import {getRating} from "../../utils/utils";
 
 const OfferScreen = (props) => {
   const {offers} = props;
+
   const offer = offers[0];
   const nearOffers = offers.length > 3 ? offers.slice(1, 4) : offers;
 
@@ -127,4 +129,10 @@ OfferScreen.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-export default OfferScreen;
+const mapStateToProps = (({city, offers}) => ({
+  city,
+  offers
+}));
+
+export {OfferScreen};
+export default connect(mapStateToProps)(OfferScreen);

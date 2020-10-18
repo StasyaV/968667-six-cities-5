@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from 'react-redux';
 import OfferList from "../offerList/offerList";
 import Map from "../map/map";
+import CitiesList from "../citiesList/citiesList";
 
 const MainScreen = (props) => {
-  const {offers} = props;
+  const {offers, cities, city} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -34,38 +36,7 @@ const MainScreen = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities={cities} currentCity={city} />
           </section>
         </div>
         <div className="cities">
@@ -116,6 +87,15 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   offers: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
-export default MainScreen;
+const mapStateToProps = (({city, offers, cities}) => ({
+  city,
+  offers,
+  cities
+}));
+
+export {MainScreen};
+export default connect(mapStateToProps)(MainScreen);

@@ -17,3 +17,12 @@ export const getRating = (comments) => {
   }
   return 0;
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const getOffersByCity = (offers, city) => {
+  const offersByCity = offers.slice().filter((offer) => offer.city === city);
+  return offersByCity;
+};
