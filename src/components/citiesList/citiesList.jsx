@@ -5,12 +5,11 @@ import {connect} from 'react-redux';
 import City from "../city/city";
 
 const CitiesList = (props) => {
-  const {cities, currentCity, changeCity, updateOffers} = props;
+  const {cities, currentCity, changeCity} = props;
 
   const onCityClick = (evt) => {
     evt.preventDefault();
     changeCity(evt.target.textContent);
-    updateOffers();
   };
 
   return (
@@ -39,15 +38,11 @@ const mapDispatchToProps = ((dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
   },
-  updateOffers() {
-    dispatch(ActionCreator.updateOffers());
-  }
 }));
 
 CitiesList.propTypes = {
   currentCity: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  updateOffers: PropTypes.func.isRequired,
 };
 
 export {CitiesList};
