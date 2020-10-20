@@ -7,7 +7,7 @@ const OfferCard = (props) => {
   const {offer, onHover} = props;
 
   return (
-    <article className="cities__place-card place-card"
+    <article className="cities__place-card place-card" id={offer.id}
       onMouseOver={(evt) => {
         evt.preventDefault();
         onHover();

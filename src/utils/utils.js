@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {SortType} from '../const';
 
 export const getRandomNumber = (minValue, maxValue) => {
   const randomNumber = Math.floor(Math.random() * maxValue);
@@ -25,4 +26,25 @@ export const extend = (a, b) => {
 export const getOffersByCity = (offers, city) => {
   const offersByCity = offers.slice().filter((offer) => offer.city === city);
   return offersByCity;
+};
+
+export const getSortedOffers = (sortType, offers) => {
+  const sortedOffers = offers.slice();
+  switch (sortType) {
+    case (SortType.POPULAR):
+      return sortedOffers;
+    case (SortType.PRICE_LOW_TO_HIGH):
+      return sortedOffers.sort((offerA, offerB) => {
+        return offerA.price - offerB.price;
+      });
+    case (SortType.PRICE_HIGH_TO_LOW):
+      return sortedOffers.sort((offerA, offerB) => {
+        return offerB.price - offerA.price;
+      });
+    case (SortType.RATING):
+      return sortedOffers.sort((offerA, offerB) => {
+        return getRating(offerB.comments) - getRating(offerA.comments);
+      });
+  }
+  return sortedOffers;
 };

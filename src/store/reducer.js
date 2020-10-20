@@ -1,7 +1,7 @@
 import {getOffer} from "../mocks/offers";
 import {extend} from "../utils/utils";
 import {ActionType} from "./action";
-import {cities, City} from "../const";
+import {cities, City, SortType} from "../const";
 
 const renderOfferCards = 4;
 
@@ -10,7 +10,9 @@ const offerCards = new Array(renderOfferCards).fill().map(getOffer);
 const initialState = {
   cities,
   city: City.AMSTERDAM,
-  offers: offerCards
+  offers: offerCards,
+  currentSort: SortType.POPULAR,
+  activeOfferId: ``
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,6 +24,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.UPDATE_OFFERS:
       return extend(state, {
         offers: offerCards
+      });
+    case ActionType.UPDATE_SORT:
+      return extend(state, {
+        currentSort: action.payload
+      });
+    case ActionType.UPDATE_ACTIVE_PIN:
+      return extend(state, {
+        activeOfferId: action.payload
       });
   }
   return state;

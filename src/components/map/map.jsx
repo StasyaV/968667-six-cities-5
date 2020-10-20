@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from 'leaflet';
+import {mapPins} from "../../const";
 
 const CITY_COORDINATES = [52.38333, 4.9];
 
@@ -10,12 +11,18 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
-    const coordinatesList = offers.map((offer) => offer.coordinates);
+    const {offers, activeOfferId} = this.props;
+    const activeOffer = offers.slice().filter((item) => item.id === +activeOfferId);
+    const otherOffers = offers.slice().filter((item) => item.id !== +activeOfferId);
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconUrl: mapPins.icon,
+      iconSize: [27, 39]
+    });
+
+    const activeIcon = leaflet.icon({
+      iconUrl: mapPins.activeIcon,
+      iconSize: [27, 39]
     });
 
     const zoom = 12;
@@ -33,11 +40,17 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    coordinatesList.forEach((coordinates) => {
+    otherOffers.forEach((offer) => {
+      console.log(offer.coordinates);
       leaflet
-        .marker(coordinates, {icon})
+        .marker(offer.coordinates, {icon})
         .addTo(map);
     });
+
+    console.log(activeOffer[0].coordinates);
+    leaflet
+      .marker(activeOffer[0].coordinates, {activeIcon})
+      .addTo(map);
   }
 
 
@@ -52,6 +65,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
   mapClass: PropTypes.string.isRequired,
+  activeOfferId: PropTypes.string.isRequired,
 };
 
 export default Map;

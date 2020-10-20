@@ -12,10 +12,18 @@ class OfferList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, updateActiveOfferId} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div
+        onMouseMove={(evt) => {
+          if (!evt.target.closest(`.place-card`)) {
+            return;
+          }
+          const elementId = evt.target.closest(`.place-card`).id;
+          updateActiveOfferId(elementId);
+        }}
+        className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
           <OfferCard
             key={offer.id}
@@ -34,6 +42,7 @@ class OfferList extends PureComponent {
 
 OfferList.propTypes = {
   offers: PropTypes.array.isRequired,
+  updateActiveOfferId: PropTypes.func.isRequired,
 };
 
 export default OfferList;
