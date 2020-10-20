@@ -41,7 +41,6 @@ class Map extends PureComponent {
       .addTo(map);
 
     otherOffers.forEach((offer) => {
-      console.log(offer.coordinates);
       leaflet
         .marker(offer.coordinates, {icon})
         .addTo(map);

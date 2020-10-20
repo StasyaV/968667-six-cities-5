@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentSort: action.payload
       });
-    case ActionType.UPDATE_ACTIVE_PIN:
+    case ActionType.UPDATE_ACTIVE_ID:
       return extend(state, {
         activeOfferId: action.payload
       });
