@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CitiesList from "../citiesList/citiesList";
 import Map from "../map/map";
-import OfferList from "../offerList/offerList";
+import OfferList from "../offer-list/offer-list";
 import Sort from "../sort/sort";
 import {getSortedOffers} from "../../utils/utils";
 
