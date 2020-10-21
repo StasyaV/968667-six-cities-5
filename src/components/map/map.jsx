@@ -22,21 +22,6 @@ class Map extends PureComponent {
       iconSize: [27, 39]
     });
 
-    const zoom = 12;
-    this._map = leaflet.map(`map`, {
-      center: CITY_COORDINATES,
-      zoom,
-      zoomControl: false,
-      marker: true
-    });
-    this._map.setView(CITY_COORDINATES, zoom);
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(this._map);
-
     otherOffers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon})
@@ -51,12 +36,28 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
+    const zoom = 12;
+    this._map = leaflet.map(`map`, {
+      center: CITY_COORDINATES,
+      zoom,
+      zoomControl: false,
+      marker: true
+    });
+    this._map.setView(CITY_COORDINATES, zoom);
+
+    this.layerGroup = leaflet.layerGroup(this.map);
+
+    leaflet
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      })
+      .addTo(this._map);
+
     this._setMap();
   }
 
   componentDidUpdate() {
-
-    this._map.remove();
+    this.layerGroup.clearLayers();
     this._setMap();
   }
 

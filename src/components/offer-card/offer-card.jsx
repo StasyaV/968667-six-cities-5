@@ -4,14 +4,10 @@ import {Link} from "react-router-dom";
 import {getRating} from "../../utils/utils";
 
 const OfferCard = (props) => {
-  const {offer, onHover} = props;
+  const {offer} = props;
 
   return (
     <article className="cities__place-card place-card" id={offer.id}
-      onMouseOver={(evt) => {
-        evt.preventDefault();
-        onHover();
-      }}
     >
       {offer.isPremium
         ?
@@ -64,7 +60,6 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  onHover: PropTypes.func,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
