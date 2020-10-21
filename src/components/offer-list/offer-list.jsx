@@ -7,11 +7,13 @@ const OfferList = (props) => {
   return (
     <div
       onMouseOver={(evt) => {
-        if (!evt.target.closest(`.place-card`)) {
-          return;
+        if (typeof updateActiveOfferId === `function`) {
+          if (!evt.target.closest(`.place-card`)) {
+            return;
+          }
+          const elementId = evt.target.closest(`.place-card`).id;
+          updateActiveOfferId(elementId);
         }
-        const elementId = evt.target.closest(`.place-card`).id;
-        updateActiveOfferId(elementId);
       }}
       className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (

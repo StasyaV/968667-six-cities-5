@@ -2,7 +2,8 @@ export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   UPDATE_OFFERS: `UPDATE_OFFERS`,
   UPDATE_SORT: `UPDATE_SORT`,
-  UPDATE_ACTIVE_ID: `UPDATE_ACTIVE_ID`
+  UPDATE_ACTIVE_ID: `UPDATE_ACTIVE_ID`,
+  OPEN_SORT: `OPEN_SORT`
 };
 
 export const ActionCreator = {
@@ -21,5 +22,9 @@ export const ActionCreator = {
   updateActiveOfferId: (id) => ({
     type: ActionType.UPDATE_ACTIVE_ID,
     payload: id
+  }),
+  openSortList: (answer) => ({
+    type: ActionType.OPEN_SORT,
+    payload: answer
   })
 };

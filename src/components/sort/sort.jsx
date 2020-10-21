@@ -5,15 +5,20 @@ import {connect} from 'react-redux';
 import {SortType} from "../../const";
 
 const Sort = (props) => {
-  const {currentSort, updateSort} = props;
+  const {currentSort, updateSort, openSort, openSortList} = props;
 
   const onSortClick = (evt) => {
     evt.preventDefault();
+    if (openSort) {
+      openSortList(false);
+    } else {
+      openSortList(true);
+    }
     updateSort(evt.target.textContent);
   };
 
   return (
-    <ul onClick={onSortClick} className="places__options places__options--custom places__options--opened">
+    <ul onClick={onSortClick} className={`places__options places__options--custom ${openSort ? `places__options--opened` : ``}`}>
       <li className={`places__option ${SortType.POPULAR === currentSort ? `places__option--active` : ``}`} tabIndex="0">{SortType.POPULAR}</li>
       <li className={`places__option ${SortType.PRICE_LOW_TO_HIGH === currentSort ? `places__option--active` : ``}`} tabIndex="0">{SortType.PRICE_LOW_TO_HIGH}</li>
       <li className={`places__option ${SortType.PRICE_HIGH_TO_LOW === currentSort ? `places__option--active` : ``}`} tabIndex="0">{SortType.PRICE_HIGH_TO_LOW}</li>
@@ -26,16 +31,22 @@ const Sort = (props) => {
 Sort.propTypes = {
   updateSort: PropTypes.func.isRequired,
   currentSort: PropTypes.string.isRequired,
+  openSort: PropTypes.bool.isRequired,
+  openSortList: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (({currentSort}) => ({
-  currentSort
+const mapStateToProps = (({currentSort, openSort}) => ({
+  currentSort,
+  openSort
 }));
 
 const mapDispatchToProps = ((dispatch) => ({
   updateSort(sort) {
     dispatch(ActionCreator.updateSort(sort));
   },
+  openSortList(answer) {
+    dispatch(ActionCreator.openSortList(answer));
+  }
 }));
 
 export {Sort};

@@ -12,7 +12,8 @@ const initialState = {
   city: City.AMSTERDAM,
   offers: offerCards,
   currentSort: SortType.POPULAR,
-  activeOfferId: ``
+  activeOfferId: ``,
+  openSort: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,11 +28,16 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.UPDATE_SORT:
       return extend(state, {
-        currentSort: action.payload
+        currentSort: action.payload,
+        openSort: false
       });
     case ActionType.UPDATE_ACTIVE_ID:
       return extend(state, {
         activeOfferId: action.payload
+      });
+    case ActionType.OPEN_SORT:
+      return extend(state, {
+        openSort: action.payload
       });
   }
   return state;
