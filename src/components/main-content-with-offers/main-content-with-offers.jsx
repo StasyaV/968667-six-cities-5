@@ -7,7 +7,7 @@ import Sort from "../sort/sort";
 import {getSortedOffers} from "../../utils/utils";
 
 const MainContentWithOffers = (props) => {
-  const {offers, cities, city, sort, updateActiveOfferId, activeOfferId} = props;
+  const {offers, cities, city, sort, updateActiveOfferId} = props;
   const sortedOffers = getSortedOffers(sort, offers);
 
   return (
@@ -36,7 +36,7 @@ const MainContentWithOffers = (props) => {
             <OfferList offers={sortedOffers} updateActiveOfferId={updateActiveOfferId}/>
           </section>
           <div className="cities__right-section">
-            <Map offers={offers} activeOfferId={activeOfferId} mapClass={`cities__map map`} />
+            <Map mapClass={`cities__map map`} />
           </div>
         </div>
       </div>
@@ -50,7 +50,6 @@ MainContentWithOffers.propTypes = {
   city: PropTypes.string.isRequired,
   sort: PropTypes.string.isRequired,
   updateActiveOfferId: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.string.isRequired,
 };
 
 export default MainContentWithOffers;

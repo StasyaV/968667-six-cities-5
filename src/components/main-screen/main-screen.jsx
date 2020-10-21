@@ -8,7 +8,7 @@ import {getOffersByCity} from "../../utils/utils";
 
 
 const MainScreen = (props) => {
-  const {offers, cities, city, currentSort, updateActiveOfferId, activeOfferId} = props;
+  const {offers, cities, city, currentSort, updateActiveOfferId} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -37,7 +37,7 @@ const MainScreen = (props) => {
       {offers.length === 0 ?
         <MainContentNoOffers cities={cities} city={city} />
         :
-        <MainContentWithOffers cities={cities} city={city} offers={offers} sort={currentSort} updateActiveOfferId={updateActiveOfferId} activeOfferId={activeOfferId}/>
+        <MainContentWithOffers cities={cities} city={city} offers={offers} sort={currentSort} updateActiveOfferId={updateActiveOfferId}/>
       }
     </div>
   );
@@ -49,15 +49,13 @@ MainScreen.propTypes = {
   city: PropTypes.string.isRequired,
   currentSort: PropTypes.string.isRequired,
   updateActiveOfferId: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (({city, offers, cities, currentSort, activeOfferId}) => ({
+const mapStateToProps = (({city, offers, cities, currentSort}) => ({
   city,
   offers: getOffersByCity(offers, city),
   cities,
-  currentSort,
-  activeOfferId
+  currentSort
 }));
 
 const mapDispatchToProps = ((dispatch) => ({

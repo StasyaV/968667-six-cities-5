@@ -16,7 +16,7 @@ class OfferList extends PureComponent {
 
     return (
       <div
-        onMouseMove={(evt) => {
+        onMouseOver={(evt) => {
           if (!evt.target.closest(`.place-card`)) {
             return;
           }
@@ -41,8 +41,8 @@ class OfferList extends PureComponent {
 }
 
 OfferList.propTypes = {
-  offers: PropTypes.array.isRequired,
-  updateActiveOfferId: PropTypes.func.isRequired,
+  offers: PropTypes.array,
+  updateActiveOfferId: PropTypes.func,
 };
 
 export default OfferList;
