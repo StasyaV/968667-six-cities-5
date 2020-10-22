@@ -8,7 +8,7 @@ import {getOffersByCity} from "../../utils/utils";
 
 
 const MainScreen = (props) => {
-  const {offers, cities, city, currentSort, updateActiveOfferId} = props;
+  const {offers, cities, city, currentSort, updateActiveOfferId, openSortList, openSort} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -37,7 +37,10 @@ const MainScreen = (props) => {
       {offers.length === 0 ?
         <MainContentNoOffers cities={cities} city={city} />
         :
-        <MainContentWithOffers cities={cities} city={city} offers={offers} sort={currentSort} updateActiveOfferId={updateActiveOfferId}/>
+        <MainContentWithOffers
+          cities={cities} city={city} offers={offers}
+          sort={currentSort} updateActiveOfferId={updateActiveOfferId}
+          openSort={openSort} openSortList={openSortList} />
       }
     </div>
   );
@@ -49,19 +52,25 @@ MainScreen.propTypes = {
   city: PropTypes.string.isRequired,
   currentSort: PropTypes.string.isRequired,
   updateActiveOfferId: PropTypes.func.isRequired,
+  openSortList: PropTypes.func.isRequired,
+  openSort: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (({city, offers, cities, currentSort}) => ({
+const mapStateToProps = (({city, offers, cities, currentSort, openSort}) => ({
   city,
   offers: getOffersByCity(offers, city),
   cities,
-  currentSort
+  currentSort,
+  openSort
 }));
 
 const mapDispatchToProps = ((dispatch) => ({
   updateActiveOfferId(id) {
     dispatch(ActionCreator.updateActiveOfferId(id));
   },
+  openSortList(bool) {
+    dispatch(ActionCreator.openSortList(bool));
+  }
 }));
 
 export {MainScreen};

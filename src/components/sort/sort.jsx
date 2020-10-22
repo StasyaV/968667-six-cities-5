@@ -5,15 +5,10 @@ import {connect} from 'react-redux';
 import {SortType} from "../../const";
 
 const Sort = (props) => {
-  const {currentSort, updateSort, openSort, openSortList} = props;
+  const {currentSort, updateSort, openSort} = props;
 
   const onSortClick = (evt) => {
     evt.preventDefault();
-    if (openSort) {
-      openSortList(false);
-    } else {
-      openSortList(true);
-    }
     updateSort(evt.target.textContent);
   };
 
@@ -32,7 +27,6 @@ Sort.propTypes = {
   updateSort: PropTypes.func.isRequired,
   currentSort: PropTypes.string.isRequired,
   openSort: PropTypes.bool.isRequired,
-  openSortList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (({currentSort, openSort}) => ({
@@ -44,9 +38,6 @@ const mapDispatchToProps = ((dispatch) => ({
   updateSort(sort) {
     dispatch(ActionCreator.updateSort(sort));
   },
-  openSortList(answer) {
-    dispatch(ActionCreator.openSortList(answer));
-  }
 }));
 
 export {Sort};

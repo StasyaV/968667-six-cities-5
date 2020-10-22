@@ -7,8 +7,16 @@ import Sort from "../sort/sort";
 import {getSortedOffers} from "../../utils/utils";
 
 const MainContentWithOffers = (props) => {
-  const {offers, cities, city, sort, updateActiveOfferId} = props;
+  const {offers, cities, city, sort, updateActiveOfferId, openSort, openSortList} = props;
   const sortedOffers = getSortedOffers(sort, offers);
+  const getOpenSortList = (evt) => {
+    evt.preventDefault();
+    if (openSort) {
+      openSortList(false);
+    } else {
+      openSortList(true);
+    }
+  };
 
   return (
     <main className="page__main page__main--index">
@@ -25,8 +33,8 @@ const MainContentWithOffers = (props) => {
             <b className="places__found">{offers.length} places to stay in {city}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex="0">
-                  Popular
+              <span onClick={getOpenSortList} className="places__sorting-type" tabIndex="0">
+                {sort}
                 <svg className="places__sorting-arrow" width="7" height="4">
                   <use xlinkHref="#icon-arrow-select"></use>
                 </svg>
@@ -50,6 +58,8 @@ MainContentWithOffers.propTypes = {
   city: PropTypes.string.isRequired,
   sort: PropTypes.string.isRequired,
   updateActiveOfferId: PropTypes.func.isRequired,
+  openSort: PropTypes.bool.isRequired,
+  openSortList: PropTypes.func.isRequired,
 };
 
 export default MainContentWithOffers;
