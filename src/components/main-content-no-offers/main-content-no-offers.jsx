@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from 'react-redux';
 import CitiesList from "../citiesList/citiesList";
 
-const NoOffersScreen = (props) => {
+const MainContentNoOffers = (props) => {
   const {cities, city} = props;
 
   return (
@@ -29,15 +28,9 @@ const NoOffersScreen = (props) => {
   );
 };
 
-NoOffersScreen.propTypes = {
+MainContentNoOffers.propTypes = {
   cities: PropTypes.array.isRequired,
   city: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (({city, cities}) => ({
-  city,
-  cities
-}));
-
-export {NoOffersScreen};
-export default connect(mapStateToProps)(NoOffersScreen);
+export default MainContentNoOffers;

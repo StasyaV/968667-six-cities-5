@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import CommentList from "../comment-list/comment-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
-import OfferList from "../offerList/offerList";
+import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import {getRating} from "../../utils/utils";
 
@@ -111,7 +111,7 @@ const OfferScreen = (props) => {
             </section>
           </div>
         </div>
-        <Map offers={nearOffers} mapClass={`property__map map`} />
+        <Map mapClass={`property__map map`} />
       </section>
       <div className="container">
         <section className="near-places places">
