@@ -7,14 +7,14 @@ import Sort from "../sort/sort";
 import {getSortedOffers} from "../../utils/utils";
 
 const MainContentWithOffers = (props) => {
-  const {offers, cities, city, sort, updateActiveOfferId, openSort, openSortList} = props;
+  const {offers, cities, city, sort, updateActiveOfferIdAction, openSort, openSortListAction} = props;
   const sortedOffers = getSortedOffers(sort, offers);
   const getOpenSortList = (evt) => {
     evt.preventDefault();
     if (openSort) {
-      openSortList(false);
+      openSortListAction(false);
     } else {
-      openSortList(true);
+      openSortListAction(true);
     }
   };
 
@@ -41,7 +41,7 @@ const MainContentWithOffers = (props) => {
               </span>
               <Sort />
             </form>
-            <OfferList offers={sortedOffers} updateActiveOfferId={updateActiveOfferId}/>
+            <OfferList offers={sortedOffers} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
           </section>
           <div className="cities__right-section">
             <Map mapClass={`cities__map map`} />
@@ -57,9 +57,9 @@ MainContentWithOffers.propTypes = {
   cities: PropTypes.array.isRequired,
   city: PropTypes.string.isRequired,
   sort: PropTypes.string.isRequired,
-  updateActiveOfferId: PropTypes.func.isRequired,
+  updateActiveOfferIdAction: PropTypes.func.isRequired,
   openSort: PropTypes.bool.isRequired,
-  openSortList: PropTypes.func.isRequired,
+  openSortListAction: PropTypes.func.isRequired,
 };
 
 export default MainContentWithOffers;

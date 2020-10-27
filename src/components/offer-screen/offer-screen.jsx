@@ -129,10 +129,10 @@ OfferScreen.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (({city, offers}) => ({
-  city,
-  offers
-}));
+const mapStateToProps = ({CITIES, OFFERS}) => ({
+  city: CITIES.city,
+  offers: OFFERS.offers
+});
 
 export {OfferScreen};
 export default connect(mapStateToProps)(OfferScreen);

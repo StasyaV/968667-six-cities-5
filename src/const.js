@@ -20,3 +20,8 @@ export const mapPins = {
   icon: `img/pin.svg`,
   activeIcon: `img/pin-active.svg`
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

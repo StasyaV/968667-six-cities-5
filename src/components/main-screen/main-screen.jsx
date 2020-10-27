@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {updateActiveOfferId, openSortList} from '../../store/action';
 import MainContentNoOffers from "../main-content-no-offers/main-content-no-offers";
 import MainContentWithOffers from "../main-content-with-offers/main-content-with-offers";
 import {getOffersByCity} from "../../utils/utils";
 
 
 const MainScreen = (props) => {
-  const {offers, cities, city, currentSort, updateActiveOfferId, openSortList, openSort} = props;
+  const {offers, cities, city, currentSort, updateActiveOfferIdAction, openSortListAction, openSort} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -39,8 +39,8 @@ const MainScreen = (props) => {
         :
         <MainContentWithOffers
           cities={cities} city={city} offers={offers}
-          sort={currentSort} updateActiveOfferId={updateActiveOfferId}
-          openSort={openSort} openSortList={openSortList} />
+          sort={currentSort} updateActiveOfferIdAction={updateActiveOfferIdAction}
+          openSort={openSort} openSortListAction={openSortListAction} />
       }
     </div>
   );
@@ -51,25 +51,25 @@ MainScreen.propTypes = {
   cities: PropTypes.array.isRequired,
   city: PropTypes.string.isRequired,
   currentSort: PropTypes.string.isRequired,
-  updateActiveOfferId: PropTypes.func.isRequired,
-  openSortList: PropTypes.func.isRequired,
+  updateActiveOfferIdAction: PropTypes.func.isRequired,
+  openSortListAction: PropTypes.func.isRequired,
   openSort: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (({city, offers, cities, currentSort, openSort}) => ({
-  city,
-  offers: getOffersByCity(offers, city),
-  cities,
-  currentSort,
-  openSort
-}));
+const mapStateToProps = ({CITIES, OFFERS, ACTIONS}) => ({
+  city: CITIES.city,
+  offers: getOffersByCity(OFFERS.offers, CITIES.city),
+  cities: CITIES.cities,
+  currentSort: ACTIONS.currentSort,
+  openSort: ACTIONS.openSort
+});
 
 const mapDispatchToProps = ((dispatch) => ({
-  updateActiveOfferId(id) {
-    dispatch(ActionCreator.updateActiveOfferId(id));
+  updateActiveOfferIdAction(id) {
+    dispatch(updateActiveOfferId(id));
   },
-  openSortList(bool) {
-    dispatch(ActionCreator.openSortList(bool));
+  openSortListAction(bool) {
+    dispatch(openSortList(bool));
   }
 }));
 

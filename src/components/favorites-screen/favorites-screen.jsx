@@ -80,10 +80,10 @@ FavoritesScreen.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (({city, offers}) => ({
-  city,
-  offers
-}));
+const mapStateToProps = ({CITIES, OFFERS}) => ({
+  city: CITIES.city,
+  offers: OFFERS.offers
+});
 
 export {FavoritesScreen};
 export default connect(mapStateToProps)(FavoritesScreen);

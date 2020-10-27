@@ -75,10 +75,10 @@ Map.propTypes = {
   activeOfferId: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (({activeOfferId, offers}) => ({
-  activeOfferId,
-  offers
-}));
+const mapStateToProps = ({ACTIONS, OFFERS}) => ({
+  activeOfferId: ACTIONS.activeOfferId,
+  offers: OFFERS.offers
+});
 
 export {Map};
 export default connect(mapStateToProps)(Map);

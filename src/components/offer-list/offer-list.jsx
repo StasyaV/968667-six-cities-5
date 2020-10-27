@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import OfferCard from '../offer-card/offer-card';
 
 const OfferList = (props) => {
-  const {offers, updateActiveOfferId} = props;
+  const {offers, updateActiveOfferIdAction} = props;
   return (
     <div
       onMouseOver={(evt) => {
-        if (typeof updateActiveOfferId === `function`) {
+        if (typeof updateActiveOfferIdAction === `function`) {
           if (!evt.target.closest(`.place-card`)) {
             return;
           }
           const elementId = evt.target.closest(`.place-card`).id;
-          updateActiveOfferId(elementId);
+          updateActiveOfferIdAction(elementId);
         }
       }}
       className="cities__places-list places__list tabs__content">
@@ -28,7 +28,7 @@ const OfferList = (props) => {
 
 OfferList.propTypes = {
   offers: PropTypes.array,
-  updateActiveOfferId: PropTypes.func,
+  updateActiveOfferIdAction: PropTypes.func,
 };
 
 export default OfferList;
