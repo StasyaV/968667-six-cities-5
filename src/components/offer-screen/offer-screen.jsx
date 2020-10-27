@@ -5,11 +5,14 @@ import CommentList from "../comment-list/comment-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
+import {fetchCommentsList} from "../../store/api-actions";
 
 const OfferScreen = (props) => {
-  const {offers} = props;
+  const {offers, loadCommentsAction} = props;
 
   const offer = offers[0];
+  const comments = loadCommentsAction(offers[0].id);
+  console.log(comments, `comments`);
   const nearOffers = offers.length > 3 ? offers.slice(1, 4) : offers;
 
   return (
@@ -106,11 +109,11 @@ const OfferScreen = (props) => {
               <ul className="reviews__list">
                 <CommentList comments={offer.comments}/>
               </ul>
-              <NewCommentForm comments={offer.comments} />
+              <NewCommentForm />
             </section>
           </div>
         </div>
-        <Map mapClass={`property__map map`} mapZoom={offer.detailsMapZoom}/>
+        <Map mapClass={`property__map map`} mapZoom={offer.detailsMapZoom} coordinates={offer.coordinates}/>
       </section>
       <div className="container">
         <section className="near-places places">
@@ -133,5 +136,11 @@ const mapStateToProps = ({CITIES, OFFERS}) => ({
   offers: OFFERS.offers
 });
 
+const mapDispatchToProps = ((dispatch) => ({
+  loadCommentsAction(offerId) {
+    dispatch(fetchCommentsList(offerId));
+  },
+}));
+
 export {OfferScreen};
-export default connect(mapStateToProps)(OfferScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

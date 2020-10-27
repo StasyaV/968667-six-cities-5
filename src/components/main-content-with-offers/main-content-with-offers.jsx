@@ -44,7 +44,7 @@ const MainContentWithOffers = (props) => {
             <OfferList offers={sortedOffers} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
           </section>
           <div className="cities__right-section">
-            <Map mapClass={`cities__map map`} mapZoom={offers[0].сityZoom}/>
+            <Map mapClass={`cities__map map`} mapZoom={offers[0].сityZoom} coordinates={offers[0].cityCoordinates}/>
           </div>
         </div>
       </div>

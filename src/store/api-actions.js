@@ -8,7 +8,11 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 
 export const fetchCommentsList = (offerId) => (dispatch, _getState, api) => (
   api.get(`/comments/${offerId}`)
-    .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
+    .then(({data}) => {
+      console.log(data);
+      dispatch(loadComments(data.map(adaptCommentToClient)));
+      console.log(data.map(adaptCommentToClient));
+    })
 );
 
 export const fetchNearOffersList = (offerId) => (dispatch, _getState, api) => (
