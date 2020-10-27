@@ -6,7 +6,7 @@ import {mapPins} from "../../const";
 
 class Map extends PureComponent {
   _setMap() {
-    const {offers, activeOfferId, nearbyOffers, mainOffer} = this.props;
+    const {offers, activeOfferId, nearbyOffers, mainOffer, coordinates, mapZoom} = this.props;
     const activeOffer = offers.slice().filter((item) => item.id === +activeOfferId);
     const otherOffers = offers.slice().filter((item) => item.id !== +activeOfferId);
 
@@ -20,7 +20,9 @@ class Map extends PureComponent {
       iconSize: [27, 39]
     });
 
-    if (mainOffer) {
+    this._map.setView(coordinates, mapZoom);
+
+    if (nearbyOffers && mainOffer) {
       nearbyOffers.forEach((offer) => {
         leaflet
           .marker(offer.coordinates, {icon})
@@ -56,9 +58,7 @@ class Map extends PureComponent {
       marker: true
     });
 
-    this._map.setView(coordinates, mapZoom);
-
-    this.layerGroup = leaflet.layerGroup(this.map);
+    this._layerGroup = leaflet.layerGroup(this._map);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -70,7 +70,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.layerGroup.clearLayers();
+    this._layerGroup.clearLayers();
     this._setMap();
   }
 
