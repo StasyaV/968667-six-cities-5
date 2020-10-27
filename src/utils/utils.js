@@ -10,15 +10,6 @@ export const formatDate = (date) => {
   return moment(date).format(`MMMM DD`);
 };
 
-
-export const getRating = (comments) => {
-  if (comments.length > 0) {
-    const ratings = comments.map((comment) => (comment.rating));
-    return Math.round(ratings.reduce((a, b) => (a + b)) / ratings.length);
-  }
-  return 0;
-};
-
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -43,8 +34,54 @@ export const getSortedOffers = (sortType, offers) => {
       });
     case (SortType.RATING):
       return sortedOffers.sort((offerA, offerB) => {
-        return getRating(offerB.comments) - getRating(offerA.comments);
+        return offerB.rating - offerA.rating;
       });
   }
   return sortedOffers;
+};
+
+export const adaptOfferToClient = (offer) => {
+  const adaptedOffer = {
+    id: offer.id,
+    city: offer.city.name,
+    cityCoordinates: [offer.city.location.latitude, offer.city.location.longitude],
+    сityZoom: offer.city.location.zoom,
+    coordinates: [offer.location.latitude, offer.location.longitude],
+    detailsMapZoom: offer.location.zoom,
+    name: offer.title,
+    img: offer.preview_image,
+    detailedImages: (offer.images > 6) ? offer.images.slice(0, 6) : offer.images,
+    price: offer.price,
+    roomType: offer.type,
+    bedroomsCount: offer.bedrooms,
+    guestsCount: offer.max_adults,
+    description: offer.description,
+    comments: [],
+    isFavorite: offer.is_favorite,
+    isPremium: offer.is_premium,
+    features: offer.goods,
+    rating: offer.rating,
+    owner: {
+      name: offer.host.name,
+      id: offer.host.id,
+      avatar: offer.host.avatar_url,
+      isSuper: offer.host.is_pro
+    }
+  };
+
+  return adaptedOffer;
+};
+
+export const adaptCommentToClient = (comment) => {
+  const adaptedComment = {
+    id: comment.id,
+    avatar: comment.user.avatar_url,
+    author: comment.user.name,
+    rating: comment.rating,
+    text: comment.comment,
+    date: comment.date,
+    isSuper: comment.user.is_pro
+  };
+
+  return adaptedComment;
 };

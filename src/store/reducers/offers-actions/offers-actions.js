@@ -23,6 +23,10 @@ const offersActions = (state = initialState, action) => {
       return extend(state, {
         openSort: action.payload
       });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
+      });
   }
   return state;
 };

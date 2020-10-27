@@ -5,7 +5,6 @@ import CommentList from "../comment-list/comment-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
-import {getRating} from "../../utils/utils";
 
 const OfferScreen = (props) => {
   const {offers} = props;
@@ -55,10 +54,10 @@ const OfferScreen = (props) => {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={ {width: `${getRating(offer.comments) * 20}%`} }></span>
+                <span style={ {width: `${offer.rating * 20}%`} }></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">{getRating(offer.comments)}</span>
+              <span className="property__rating-value rating__value">{offer.rating}</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">

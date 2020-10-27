@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import {mapPins} from "../../const";
 
-const CITY_COORDINATES = [52.38333, 4.9];
-
 class Map extends PureComponent {
   _setMap() {
     const {offers, activeOfferId} = this.props;
@@ -36,14 +34,18 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const zoom = 12;
+    const {offers} = this.props;
+    console.log(offers[0]);
+    console.log(`center:`, offers[0].cityCoordinates);
+    console.log(`zoom:`, offers[0].сityZoom);
     this._map = leaflet.map(`map`, {
-      center: CITY_COORDINATES,
-      zoom,
+      center: offers[0].cityCoordinates,
+      zoom: offers[0].сityZoom,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(CITY_COORDINATES, zoom);
+
+    this._map.setView([52.37454, 4.897976], 12);
 
     this.layerGroup = leaflet.layerGroup(this.map);
 
