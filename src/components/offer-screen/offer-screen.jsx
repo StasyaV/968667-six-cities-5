@@ -110,7 +110,7 @@ const OfferScreen = (props) => {
             </section>
           </div>
         </div>
-        <Map mapClass={`property__map map`} />
+        <Map mapClass={`property__map map`} mapZoom={offer.detailsMapZoom}/>
       </section>
       <div className="container">
         <section className="near-places places">

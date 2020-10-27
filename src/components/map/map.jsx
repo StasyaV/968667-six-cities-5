@@ -34,18 +34,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
-    console.log(offers[0]);
-    console.log(`center:`, offers[0].cityCoordinates);
-    console.log(`zoom:`, offers[0].сityZoom);
+    const {offers, mapZoom} = this.props;
     this._map = leaflet.map(`map`, {
       center: offers[0].cityCoordinates,
-      zoom: offers[0].сityZoom,
+      zoom: mapZoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView([52.37454, 4.897976], 12);
+    this._map.setView(offers[0].cityCoordinates, mapZoom);
 
     this.layerGroup = leaflet.layerGroup(this.map);
 
@@ -75,6 +72,7 @@ Map.propTypes = {
   offers: PropTypes.array.isRequired,
   mapClass: PropTypes.string.isRequired,
   activeOfferId: PropTypes.string.isRequired,
+  mapZoom: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ACTIONS, OFFERS}) => ({
