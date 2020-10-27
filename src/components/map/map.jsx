@@ -4,11 +4,9 @@ import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import {mapPins} from "../../const";
 
-const CITY_COORDINATES = [52.38333, 4.9];
-
 class Map extends PureComponent {
   _setMap() {
-    const {offers, activeOfferId} = this.props;
+    const {offers, activeOfferId, nearbyOffers, mainOffer, coordinates, mapZoom} = this.props;
     const activeOffer = offers.slice().filter((item) => item.id === +activeOfferId);
     const otherOffers = offers.slice().filter((item) => item.id !== +activeOfferId);
 
@@ -21,6 +19,22 @@ class Map extends PureComponent {
       iconUrl: mapPins.activeIcon,
       iconSize: [27, 39]
     });
+
+    this._map.setView(coordinates, mapZoom);
+
+    if (nearbyOffers && mainOffer) {
+      nearbyOffers.forEach((offer) => {
+        leaflet
+          .marker(offer.coordinates, {icon})
+          .addTo(this._map);
+      });
+
+      leaflet
+        .marker(mainOffer.coordinates, {icon: activeIcon})
+        .addTo(this._map);
+
+      return;
+    }
 
     otherOffers.forEach((offer) => {
       leaflet
@@ -36,16 +50,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const zoom = 12;
+    const {coordinates, mapZoom} = this.props;
     this._map = leaflet.map(`map`, {
-      center: CITY_COORDINATES,
-      zoom,
+      center: coordinates,
+      zoom: mapZoom,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(CITY_COORDINATES, zoom);
 
-    this.layerGroup = leaflet.layerGroup(this.map);
+    this._layerGroup = leaflet.layerGroup(this._map);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -57,7 +70,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.layerGroup.clearLayers();
+    this._layerGroup.clearLayers();
     this._setMap();
   }
 
@@ -73,12 +86,16 @@ Map.propTypes = {
   offers: PropTypes.array.isRequired,
   mapClass: PropTypes.string.isRequired,
   activeOfferId: PropTypes.string.isRequired,
+  mapZoom: PropTypes.number.isRequired,
+  coordinates: PropTypes.array.isRequired,
+  nearbyOffers: PropTypes.array,
+  mainOffer: PropTypes.object,
 };
 
-const mapStateToProps = (({activeOfferId, offers}) => ({
-  activeOfferId,
-  offers
-}));
+const mapStateToProps = ({ACTIONS, OFFERS}) => ({
+  activeOfferId: ACTIONS.activeOfferId,
+  offers: OFFERS.offers
+});
 
 export {Map};
 export default connect(mapStateToProps)(Map);

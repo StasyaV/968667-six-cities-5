@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from '../../store/action';
+import {changeCity} from '../../store/action';
 import {connect} from 'react-redux';
 import City from "../city/city";
 
 const CitiesList = (props) => {
-  const {cities, currentCity, changeCity} = props;
+  const {cities, currentCity, changeCityAction} = props;
 
   const onCityClick = (evt) => {
     evt.preventDefault();
-    changeCity(evt.target.textContent);
+    changeCityAction(evt.target.textContent);
   };
 
   return (
@@ -29,17 +29,17 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   cities: PropTypes.array.isRequired,
   currentCity: PropTypes.string.isRequired,
-  changeCity: PropTypes.func.isRequired,
+  changeCityAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (({city, cities}) => ({
-  currentCity: city,
-  cities
-}));
+const mapStateToProps = ({CITIES}) => ({
+  currentCity: CITIES.city,
+  cities: CITIES.cities
+});
 
 const mapDispatchToProps = ((dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  changeCityAction(city) {
+    dispatch(changeCity(city));
   },
 }));
 

@@ -26,7 +26,7 @@ const withForm = (Component) => {
 
     _handleRatingChange(evt) {
       this.setState({
-        rate: evt.target.value,
+        rating: evt.target.value,
       });
     }
 

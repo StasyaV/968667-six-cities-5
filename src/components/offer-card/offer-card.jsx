@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {getRating} from "../../utils/utils";
 
 const OfferCard = (props) => {
   const {offer} = props;
@@ -35,7 +34,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={ {width: `${getRating(offer.comments) * 20}%`} }></span>
+            <span style={ {width: `${offer.rating * 20}%`} }></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -59,6 +58,7 @@ OfferCard.propTypes = {
     price: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
     comments: PropTypes.array,
   }).isRequired,
 };
