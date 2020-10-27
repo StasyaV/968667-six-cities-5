@@ -1,4 +1,4 @@
-import {loadOffers, loadComments} from "./action";
+import {loadOffers, loadComments, loadNearbyOffers} from "./action";
 import {adaptOfferToClient, adaptCommentToClient} from "../utils/utils";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -8,14 +8,10 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 
 export const fetchCommentsList = (offerId) => (dispatch, _getState, api) => (
   api.get(`/comments/${offerId}`)
-    .then(({data}) => {
-      console.log(data);
-      dispatch(loadComments(data.map(adaptCommentToClient)));
-      console.log(data.map(adaptCommentToClient));
-    })
+    .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
 );
 
-export const fetchNearOffersList = (offerId) => (dispatch, _getState, api) => (
+export const fetchNearbyOffersList = (offerId) => (dispatch, _getState, api) => (
   api.get(`/hotels/${offerId}/nearby`)
-    .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient))))
+    .then(({data}) => dispatch(loadNearbyOffers(data.map(adaptOfferToClient))))
 );

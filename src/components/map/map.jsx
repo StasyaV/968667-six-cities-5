@@ -6,7 +6,7 @@ import {mapPins} from "../../const";
 
 class Map extends PureComponent {
   _setMap() {
-    const {offers, activeOfferId} = this.props;
+    const {offers, activeOfferId, nearbyOffers, mainOffer} = this.props;
     const activeOffer = offers.slice().filter((item) => item.id === +activeOfferId);
     const otherOffers = offers.slice().filter((item) => item.id !== +activeOfferId);
 
@@ -19,6 +19,20 @@ class Map extends PureComponent {
       iconUrl: mapPins.activeIcon,
       iconSize: [27, 39]
     });
+
+    if (mainOffer) {
+      nearbyOffers.forEach((offer) => {
+        leaflet
+          .marker(offer.coordinates, {icon})
+          .addTo(this._map);
+      });
+
+      leaflet
+        .marker(mainOffer.coordinates, {icon: activeIcon})
+        .addTo(this._map);
+
+      return;
+    }
 
     otherOffers.forEach((offer) => {
       leaflet
@@ -74,6 +88,8 @@ Map.propTypes = {
   activeOfferId: PropTypes.string.isRequired,
   mapZoom: PropTypes.number.isRequired,
   coordinates: PropTypes.array.isRequired,
+  nearbyOffers: PropTypes.array,
+  mainOffer: PropTypes.object,
 };
 
 const mapStateToProps = ({ACTIONS, OFFERS}) => ({

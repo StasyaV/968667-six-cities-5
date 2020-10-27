@@ -6,6 +6,7 @@ export const ActionType = {
   OPEN_SORT: `OPEN_SORT`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
@@ -42,6 +43,11 @@ export const loadOffers = (offers) => ({
 export const loadComments = (comments) => ({
   type: ActionType.LOAD_COMMENTS,
   payload: comments,
+});
+
+export const loadNearbyOffers = (offers) => ({
+  type: ActionType.LOAD_NEARBY_OFFERS,
+  payload: offers,
 });
 
 export const requireAuthorization = (status) => ({

@@ -5,7 +5,9 @@ import {SortType} from "../../../const";
 const initialState = {
   currentSort: SortType.POPULAR,
   activeOfferId: ``,
-  openSort: false
+  openSort: false,
+  comments: [],
+  nearbyOffers: []
 };
 
 const offersActions = (state = initialState, action) => {
@@ -26,6 +28,10 @@ const offersActions = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       return extend(state, {
         comments: action.payload,
+      });
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return extend(state, {
+        nearbyOffers: action.payload,
       });
   }
   return state;
