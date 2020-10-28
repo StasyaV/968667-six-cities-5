@@ -20,7 +20,7 @@ class Map extends PureComponent {
       iconSize: [27, 39]
     });
 
-    this._map.setView(coordinates, mapZoom);
+    this._map.flyTo(coordinates, mapZoom);
 
     if (nearbyOffers && mainOffer) {
       nearbyOffers.forEach((offer) => {
