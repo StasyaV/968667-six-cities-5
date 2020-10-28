@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
+import {Link} from "react-router-dom";
 import {updateActiveOfferId, openSortList} from '../../store/action';
 import MainContentNoOffers from "../main-content-no-offers/main-content-no-offers";
 import MainContentWithOffers from "../main-content-with-offers/main-content-with-offers";
 import {getOffersByCity} from "../../utils/utils";
+import {AuthorizationStatus} from "../../const";
 
 
 const MainScreen = (props) => {
-  const {offers, cities, city, currentSort, updateActiveOfferIdAction, openSortListAction, openSort} = props;
+  const {offers, cities, city, currentSort, updateActiveOfferIdAction, openSortListAction, openSort, authorizationStatus, email} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -23,11 +25,19 @@ const MainScreen = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                  {authorizationStatus === AuthorizationStatus.NO_AUTH ?
+                    <Link to="/login" className="header__nav-link header__nav-link--profile" href="#">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__login">Sign in</span>
+                    </Link>
+                    :
+                    <Link to="/favorites" className="header__nav-link header__nav-link--profile" href="#">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__user-name user__name">{email}</span>
+                    </Link>
+                  }
                 </li>
               </ul>
             </nav>
@@ -53,15 +63,19 @@ MainScreen.propTypes = {
   currentSort: PropTypes.string.isRequired,
   updateActiveOfferIdAction: PropTypes.func.isRequired,
   openSortListAction: PropTypes.func.isRequired,
-  openSort: PropTypes.bool.isRequired
+  openSort: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({CITIES, OFFERS, ACTIONS}) => ({
+const mapStateToProps = ({CITIES, OFFERS, ACTIONS, USER}) => ({
   city: CITIES.city,
   offers: getOffersByCity(OFFERS.offers, CITIES.city),
   cities: CITIES.cities,
   currentSort: ACTIONS.currentSort,
-  openSort: ACTIONS.openSort
+  openSort: ACTIONS.openSort,
+  authorizationStatus: USER.authorizationStatus,
+  email: USER.email
 });
 
 const mapDispatchToProps = ((dispatch) => ({

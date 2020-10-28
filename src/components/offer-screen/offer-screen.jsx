@@ -6,6 +6,7 @@ import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import {fetchCommentsList, fetchNearbyOffersList} from "../../store/api-actions";
+import {AuthorizationStatus} from "../../const";
 
 class OfferScreen extends PureComponent {
   constructor(props) {
@@ -24,7 +25,7 @@ class OfferScreen extends PureComponent {
   }
 
   render() {
-    const {offers, comments, nearbyOffers, activeOfferId} = this.props;
+    const {offers, comments, nearbyOffers, activeOfferId, authorizationStatus} = this.props;
     const offer = offers.find((item) => item.id === +activeOfferId);
 
     return (
@@ -121,7 +122,8 @@ class OfferScreen extends PureComponent {
                 <ul className="reviews__list">
                   <CommentList comments={comments}/>
                 </ul>
-                <NewCommentForm />
+                {authorizationStatus === AuthorizationStatus.AUTH ?
+                  <NewCommentForm /> : ``}
               </section>
             </div>
           </div>
@@ -149,14 +151,16 @@ OfferScreen.propTypes = {
   loadCommentsAction: PropTypes.func.isRequired,
   loadNearbyOffersAction: PropTypes.func.isRequired,
   activeOfferId: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({CITIES, OFFERS, ACTIONS}) => ({
+const mapStateToProps = ({CITIES, OFFERS, ACTIONS, USER}) => ({
   city: CITIES.city,
   offers: OFFERS.offers,
   activeOfferId: ACTIONS.activeOfferId,
   comments: ACTIONS.comments,
-  nearbyOffers: ACTIONS.nearbyOffers
+  nearbyOffers: ACTIONS.nearbyOffers,
+  authorizationStatus: USER.authorizationStatus
 });
 
 const mapDispatchToProps = ((dispatch) => ({

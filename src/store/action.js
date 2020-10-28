@@ -8,6 +8,8 @@ export const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  SAVE_EMAIL: `SAVE_EMAIL`
 };
 
 export const changeCity = (city) => ({
@@ -53,4 +55,14 @@ export const loadNearbyOffers = (offers) => ({
 export const requireAuthorization = (status) => ({
   type: ActionType.REQUIRED_AUTHORIZATION,
   payload: status,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+export const saveUserEmail = (email) => ({
+  type: ActionType.SAVE_EMAIL,
+  payload: email,
 });
