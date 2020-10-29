@@ -1,15 +1,17 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
+import browserHistory from "../../browser-history";
 import MainScreen from "../main-screen/main-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
+import PrivateRoute from "../private-route/private-route";
 
 
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/">
           <MainScreen />
@@ -17,9 +19,14 @@ const App = () => {
         <Route exact path="/login">
           <LoginScreen />
         </Route>
-        <Route exact path="/favorites">
-          <FavoritesScreen />
-        </Route>
+        <PrivateRoute
+          exact path={`/favorites`}
+          render={() => {
+            return (
+              <FavoritesScreen />
+            );
+          }}
+        />
         <Route exact path="/offer/:id">
           <OfferScreen />
         </Route>

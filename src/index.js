@@ -8,6 +8,7 @@ import {createAPI} from "./services/api";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import {fetchOffersList} from "./store/api-actions";
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch()
@@ -16,15 +17,19 @@ const api = createAPI(
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
-store.dispatch(fetchOffersList());
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchOffersList())
+])
+  .then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  });
