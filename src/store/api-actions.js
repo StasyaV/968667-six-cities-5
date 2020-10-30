@@ -1,4 +1,5 @@
-import {loadOffers, loadComments, loadNearbyOffers, requireAuthorization, redirectToRoute, saveUserEmail} from "./action";
+import {loadOffers, loadComments, loadNearbyOffers, requireAuthorization,
+  redirectToRoute, saveUserEmail, loadFavoriteOffers} from "./action";
 import {adaptOfferToClient, adaptCommentToClient} from "../utils/utils";
 import {AuthorizationStatus} from "../const";
 
@@ -17,6 +18,11 @@ export const fetchNearbyOffersList = (offerId) => (dispatch, _getState, api) => 
     .then(({data}) => dispatch(loadNearbyOffers(data.map(adaptOfferToClient))))
 );
 
+export const fetchFavoriteOffersList = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient))))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
@@ -24,9 +30,18 @@ export const checkAuth = () => (dispatch, _getState, api) => (
       throw err;
     })
 );
+
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(saveUserEmail(email)))
     .then(() => dispatch(redirectToRoute(`/`)))
 );
+
+export const changeFavorite = (offerId, status) => (dispatch, _getState, api) => {
+  api.post(`/favorite/${offerId}/${status}`)
+    .then(api.get(`/favorite`)
+    .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient)))))
+    .then(api.get(`/hotels`)
+    .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient)))));
+};

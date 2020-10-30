@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OfferCard from '../offer-card/offer-card';
 
 const OfferList = (props) => {
-  const {offers, updateActiveOfferIdAction} = props;
+  const {offers, updateActiveOfferIdAction, authorizationStatus, changeFavoriteStatusAction} = props;
   return (
     <div
       onMouseOver={(evt) => {
@@ -20,6 +20,8 @@ const OfferList = (props) => {
         <OfferCard
           key={offer.id}
           offer={offer}
+          authorizationStatus={authorizationStatus}
+          changeFavoriteStatusAction={changeFavoriteStatusAction}
         />
       ))}
     </div>
@@ -29,6 +31,8 @@ const OfferList = (props) => {
 OfferList.propTypes = {
   offers: PropTypes.array,
   updateActiveOfferIdAction: PropTypes.func,
+  authorizationStatus: PropTypes.string.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
 export default OfferList;

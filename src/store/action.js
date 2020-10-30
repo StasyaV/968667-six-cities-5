@@ -7,9 +7,11 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-  SAVE_EMAIL: `SAVE_EMAIL`
+  SAVE_EMAIL: `SAVE_EMAIL`,
+  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`
 };
 
 export const changeCity = (city) => ({
@@ -65,4 +67,14 @@ export const redirectToRoute = (url) => ({
 export const saveUserEmail = (email) => ({
   type: ActionType.SAVE_EMAIL,
   payload: email,
+});
+
+export const changeFavoriteStatus = (offerId, status) => ({
+  type: ActionType.CHANGE_FAVORITE_STATUS,
+  payload: offerId, status,
+});
+
+export const loadFavoriteOffers = (offers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: offers,
 });
