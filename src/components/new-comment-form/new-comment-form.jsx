@@ -22,6 +22,7 @@ class NewCommentForm extends PureComponent {
 
     if (!this.textRef || !this.ratingRef || this.textRef.value > 300 || this.textRef.value < 50) {
       this.buttonRef.disabled = true;
+      this.textRef.style.border = `red`;
     }
 
     onCommentSubmit({

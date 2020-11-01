@@ -7,14 +7,10 @@ const withForm = (Component) => {
       super(props);
 
       this.state = {
-        id: null,
-        author: `Max`,
-        avatar: `img/avatar-max.jpg`,
         rating: null,
-        text: null,
-        date: new Date(),
+        text: null
       };
-
+      
       this._handleRatingChange = this._handleRatingChange.bind(this);
       this._handleTextFieldChange = this._handleTextFieldChange.bind(this);
       this._handleSubmit = this._handleSubmit.bind(this);
