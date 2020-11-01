@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {fetchFavoriteOffersList} from "../../store/api-actions";
+import {fetchFavoriteOffersList, changeFavorite} from "../../store/api-actions";
 import {cities} from "../../const";
 import {getOffersByCity} from "../../utils/utils";
 
@@ -17,7 +17,15 @@ class FavoritesScreen extends PureComponent {
   }
 
   render() {
-    const {favoriteOffers} = this.props;
+    const {favoriteOffers, changeFavoriteStatusAction} = this.props;
+    const onFavoriteButtonClick = (evt) => {
+      const offer = evt.target.closest(`.place-card`);
+      if (!offer) {
+        return;
+      }
+
+      changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
+    };
 
     return (
       favoriteOffers.length === 0 ?
@@ -37,12 +45,12 @@ class FavoritesScreen extends PureComponent {
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              {cities.map((city) => {
+              {cities.map((city, index) => {
                 const filteredOffers = getOffersByCity(favoriteOffers, city);
                 if (filteredOffers.length > 0) {
                   return (
                     <ul className="favorites__list">
-                      <li className="favorites__locations-items">
+                      <li key={`${city}-${index}`} className="favorites__locations-items">
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
                             <a className="locations__item-link" href="#">
@@ -52,7 +60,7 @@ class FavoritesScreen extends PureComponent {
                         </div>
                         <div className="favorites__places">
                           {filteredOffers.map((offer) => (
-                            <article key={offer.id} className="favorites__card place-card">
+                            <article key={`${city}-${offer.id}`} className="favorites__card place-card" id={offer.id}>
                               <div className="favorites__image-wrapper place-card__image-wrapper">
                                 <a href="#">
                                   <img className="place-card__image" src={offer.img} width="150" height="110" alt="Place image"/>
@@ -64,7 +72,7 @@ class FavoritesScreen extends PureComponent {
                                     <b className="place-card__price-value">&euro; {offer.price}</b>
                                     <span className="place-card__price-text">&#47;&nbsp;night</span>
                                   </div>
-                                  <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+                                  <button onClick={onFavoriteButtonClick} className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
                                     <svg className="place-card__bookmark-icon" width="18" height="19">
                                       <use xlinkHref="#icon-bookmark"></use>
                                     </svg>
@@ -84,6 +92,7 @@ class FavoritesScreen extends PureComponent {
                               </div>
                             </article>
                           ))}
+                          <p></p>
                         </div>
                       </li>
                     </ul>
@@ -103,6 +112,7 @@ class FavoritesScreen extends PureComponent {
 FavoritesScreen.propTypes = {
   favoriteOffers: PropTypes.array.isRequired,
   loadFavoriteOffersAction: PropTypes.func.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ACTIONS}) => ({
@@ -113,6 +123,9 @@ const mapDispatchToProps = ((dispatch) => ({
   loadFavoriteOffersAction() {
     dispatch(fetchFavoriteOffersList());
   },
+  changeFavoriteStatusAction(id, num) {
+    dispatch(changeFavorite(id, num));
+  }
 }));
 
 export {FavoritesScreen};
