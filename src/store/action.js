@@ -11,7 +11,8 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   SAVE_EMAIL: `SAVE_EMAIL`,
-  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`
+  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
+  SEND_COMMENT: `SEND_COMMENT`
 };
 
 export const changeCity = (city) => ({
@@ -77,4 +78,9 @@ export const changeFavoriteStatus = (offerId, status) => ({
 export const loadFavoriteOffers = (offers) => ({
   type: ActionType.LOAD_FAVORITE_OFFERS,
   payload: offers,
+});
+
+export const sendComment = (commentData, offerId) => ({
+  type: ActionType.SEND_COMMENT,
+  payload: commentData, offerId,
 });

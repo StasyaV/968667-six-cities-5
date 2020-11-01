@@ -45,3 +45,10 @@ export const changeFavorite = (offerId, status) => (dispatch, _getState, api) =>
     .then(api.get(`/hotels`)
     .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient)))));
 };
+
+export const sendComment = ({comment, rating}, offerId) => (dispatch, _getState, api) => {
+  console.log({comment, rating});
+  api.post(`/comments/${offerId}`, {comment, rating})
+    .then(api.get(`/comments/${offerId}`)
+    .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient)))));
+};

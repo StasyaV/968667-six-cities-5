@@ -33,7 +33,7 @@ class OfferScreen extends PureComponent {
     };
     return (
       <main className="page__main page__main--property">
-        <section className="property">
+        <section className="property" id={offer.id}>
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {offer.detailedImages.map((img, index) =>
