@@ -10,7 +10,7 @@ class FavoritesScreen extends PureComponent {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {loadFavoriteOffersAction} = this.props;
 
     loadFavoriteOffersAction();
@@ -24,7 +24,7 @@ class FavoritesScreen extends PureComponent {
         return;
       }
 
-      changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
+      changeFavoriteStatusAction(offer.id, 0);
     };
 
     return (
@@ -49,8 +49,8 @@ class FavoritesScreen extends PureComponent {
                 const filteredOffers = getOffersByCity(favoriteOffers, city);
                 if (filteredOffers.length > 0) {
                   return (
-                    <ul className="favorites__list">
-                      <li key={`${city}-${index}`} className="favorites__locations-items">
+                    <ul key={`${city}-${index}`} className="favorites__list">
+                      <li className="favorites__locations-items">
                         <div className="favorites__locations locations locations--current">
                           <div className="locations__item">
                             <a className="locations__item-link" href="#">
@@ -60,7 +60,7 @@ class FavoritesScreen extends PureComponent {
                         </div>
                         <div className="favorites__places">
                           {filteredOffers.map((offer) => (
-                            <article key={`${city}-${offer.id}`} className="favorites__card place-card" id={offer.id}>
+                            <article key={`${offer.roomType}-${offer.id}`} className="favorites__card place-card" id={offer.id}>
                               <div className="favorites__image-wrapper place-card__image-wrapper">
                                 <a href="#">
                                   <img className="place-card__image" src={offer.img} width="150" height="110" alt="Place image"/>
