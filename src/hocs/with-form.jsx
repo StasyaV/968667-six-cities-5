@@ -27,10 +27,10 @@ const withForm = (Component) => {
       });
     }
 
-    _resetState(evt) {
+    _resetState() {
       this.setState({
-        rating: evt.target.value = ``,
-        comment: evt.target.value = ``
+        rating: ``,
+        comment: ``
       });
     }
 

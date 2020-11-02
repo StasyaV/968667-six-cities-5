@@ -40,15 +40,16 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const changeFavorite = (offerId, status) => (dispatch, _getState, api) => {
   api.post(`/favorite/${offerId}/${status}`)
+  .then(api.get(`/hotels`)
+  .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient)))))
     .then(api.get(`/favorite`)
-    .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient)))))
-    .then(api.get(`/hotels`)
-    .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient)))));
+    .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient)))));
 };
 
 export const sendComment = ({comment, rating}, offerId) => (dispatch, _getState, api) => {
-  console.log({comment, rating});
   api.post(`/comments/${offerId}`, {comment, rating})
-    .then(api.get(`/comments/${offerId}`)
-    .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient)))));
+  .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
+  .catch((err) => {
+    throw err;
+  });
 };
