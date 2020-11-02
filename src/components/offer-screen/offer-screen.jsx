@@ -11,12 +11,12 @@ import {AuthorizationStatus} from "../../const";
 class OfferScreen extends PureComponent {
   constructor(props) {
     super(props);
-    const {offers, activeOfferId} = this.props;
-    this.offer = offers.find((item) => item.id === +activeOfferId);
   }
 
   componentWillMount() {
     const {loadCommentsAction, loadNearbyOffersAction} = this.props;
+    const {offers, activeOfferId} = this.props;
+    this.offer = offers.find((item) => item.id === +activeOfferId);
 
     this._getAdditionalData(loadCommentsAction, this.offer.id);
     this._getAdditionalData(loadNearbyOffersAction, this.offer.id);

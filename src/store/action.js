@@ -12,7 +12,8 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   SAVE_EMAIL: `SAVE_EMAIL`,
   CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
-  SEND_COMMENT: `SEND_COMMENT`
+  SEND_COMMENT: `SEND_COMMENT`,
+  UPDATE_ERROR_STATUS: `UPDATE_ERROR_STATUS`
 };
 
 export const changeCity = (city) => ({
@@ -83,4 +84,9 @@ export const loadFavoriteOffers = (offers) => ({
 export const sendComment = (commentData, offerId) => ({
   type: ActionType.SEND_COMMENT,
   payload: commentData, offerId,
+});
+
+export const updateErrorStatus = (answer) => ({
+  type: ActionType.UPDATE_ERROR_STATUS,
+  payload: answer
 });

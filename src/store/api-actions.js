@@ -1,5 +1,5 @@
 import {loadOffers, loadComments, loadNearbyOffers, requireAuthorization,
-  redirectToRoute, saveUserEmail, loadFavoriteOffers} from "./action";
+  redirectToRoute, saveUserEmail, loadFavoriteOffers, updateErrorStatus} from "./action";
 import {adaptOfferToClient, adaptCommentToClient} from "../utils/utils";
 import {AuthorizationStatus} from "../const";
 
@@ -50,6 +50,7 @@ export const sendComment = ({comment, rating}, offerId) => (dispatch, _getState,
   api.post(`/comments/${offerId}`, {comment, rating})
   .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
   .catch((err) => {
+    dispatch(updateErrorStatus(true));
     throw err;
   });
 };

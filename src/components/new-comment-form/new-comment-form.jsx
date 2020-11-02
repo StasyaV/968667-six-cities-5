@@ -4,6 +4,7 @@ import withForm from "../../hocs/with-form";
 import {CommentLength} from "../../const";
 import {connect} from "react-redux";
 import {sendComment} from "../../store/api-actions";
+import {updateErrorStatus} from '../../store/action';
 
 class NewCommentForm extends PureComponent {
   constructor(props) {
@@ -15,18 +16,18 @@ class NewCommentForm extends PureComponent {
   }
 
   _handleFormSubmit(evt) {
-    const {onCommentSubmit, rating, comment, offerId, resetState} = this.props;
+    const {onCommentSubmit, rating, comment, offerId, resetState, isErrorToSubmit, updateErrorStatusAction} = this.props;
     evt.preventDefault();
 
     onCommentSubmit({
       comment,
       rating
-    }, offerId);
+    },` offerId`);
 
 
-    if (ErrorEvent) {
-      console.log(this.formRef.current);
-      this.formRef.current.stlye.boxShadow = `0 0 10px red`;
+    if (isErrorToSubmit) {
+      this.formRef.current.style.boxShadow = `0 0 10px red`;
+      updateErrorStatusAction(false);
     }
 
     resetState();
@@ -101,16 +102,22 @@ NewCommentForm.propTypes = {
   onCommentInputChange: PropTypes.func.isRequired,
   onRatingChange: PropTypes.func.isRequired,
   offerId: PropTypes.string.isRequired,
-  resetState: PropTypes.func.isRequired
+  resetState: PropTypes.func.isRequired,
+  isErrorToSubmit: PropTypes.bool.isRequired,
+  updateErrorStatusAction: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ACTIONS}) => ({
-  offerId: ACTIONS.activeOfferId
+const mapStateToProps = ({ACTIONS, USER}) => ({
+  offerId: ACTIONS.activeOfferId,
+  isErrorToSubmit: USER.isErrorToSubmit
 });
 
 const mapDispatchToProps = ((dispatch) => ({
-  onCommentSubmit(commentData, offerId) {
-    dispatch(sendComment(commentData, offerId));
+  onCommentSubmit(commentData, offerId, answer) {
+    dispatch(sendComment(commentData, offerId, answer));
+  },
+  updateErrorStatusAction(answer) {
+    dispatch(updateErrorStatus(answer));
   }
 }));
 

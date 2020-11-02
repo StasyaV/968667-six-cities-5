@@ -16,7 +16,9 @@ const OfferList = (props) => {
         }
       }}
       onMouseOut={() => {
-        updateActiveOfferIdAction(``);
+        if (typeof updateActiveOfferIdAction === `function`) {
+          updateActiveOfferIdAction(``);
+        }
       }}
       className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
