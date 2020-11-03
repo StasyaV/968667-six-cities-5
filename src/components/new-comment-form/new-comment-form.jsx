@@ -16,25 +16,27 @@ class NewCommentForm extends PureComponent {
   }
 
   _handleFormSubmit(evt) {
-    const {onCommentSubmit, rating, comment, offerId, resetState, isErrorToSubmit, updateErrorStatusAction} = this.props;
+    const {onCommentSubmit, rating, comment, offerId, resetState} = this.props;
     evt.preventDefault();
 
     onCommentSubmit({
       comment,
       rating
-    },` offerId`);
+    }, offerId);
 
+    resetState();
+    this.formRef.current.reset();
+  }
+
+  render() {
+    const {rating, comment, onRatingChange, onCommentInputChange,
+      isErrorToSubmit, updateErrorStatusAction} = this.props;
 
     if (isErrorToSubmit) {
       this.formRef.current.style.boxShadow = `0 0 10px red`;
       updateErrorStatusAction(false);
     }
 
-    resetState();
-    this.formRef.current.reset();
-  }
-  render() {
-    const {rating, comment, onRatingChange, onCommentInputChange} = this.props;
     return (
       <form ref={this.formRef} onSubmit={this._handleFormSubmit} className="reviews__form form" action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
