@@ -7,7 +7,8 @@ const initialState = {
   activeOfferId: ``,
   openSort: false,
   comments: [],
-  nearbyOffers: []
+  nearbyOffers: [],
+  favoriteOffers: []
 };
 
 const offersActions = (state = initialState, action) => {
@@ -32,6 +33,10 @@ const offersActions = (state = initialState, action) => {
     case ActionType.LOAD_NEARBY_OFFERS:
       return extend(state, {
         nearbyOffers: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload,
       });
   }
   return state;

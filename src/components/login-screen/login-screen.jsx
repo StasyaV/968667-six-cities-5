@@ -32,6 +32,7 @@ class LoginScreen extends PureComponent {
     if (authorizationStatus === AuthorizationStatus.AUTH) {
       return <Redirect to={`/`} />;
     }
+
     return (
       <main className="page__main page__main--login">
         <div className="page__login-container container">

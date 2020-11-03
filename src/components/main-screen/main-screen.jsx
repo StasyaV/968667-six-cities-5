@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {updateActiveOfferId, openSortList} from '../../store/action';
+import {changeFavorite} from "../../store/api-actions";
 import MainContentNoOffers from "../main-content-no-offers/main-content-no-offers";
 import MainContentWithOffers from "../main-content-with-offers/main-content-with-offers";
 import {getOffersByCity} from "../../utils/utils";
@@ -10,7 +11,8 @@ import {AuthorizationStatus} from "../../const";
 
 
 const MainScreen = (props) => {
-  const {offers, cities, city, currentSort, updateActiveOfferIdAction, openSortListAction, openSort, authorizationStatus, email} = props;
+  const {offers, cities, city, currentSort, updateActiveOfferIdAction,
+    openSortListAction, openSort, authorizationStatus, email, changeFavoriteStatusAction} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -50,7 +52,9 @@ const MainScreen = (props) => {
         <MainContentWithOffers
           cities={cities} city={city} offers={offers}
           sort={currentSort} updateActiveOfferIdAction={updateActiveOfferIdAction}
-          openSort={openSort} openSortListAction={openSortListAction} />
+          openSort={openSort} openSortListAction={openSortListAction}
+          authorizationStatus={authorizationStatus}
+          changeFavoriteStatusAction={changeFavoriteStatusAction} />
       }
     </div>
   );
@@ -66,6 +70,7 @@ MainScreen.propTypes = {
   openSort: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({CITIES, OFFERS, ACTIONS, USER}) => ({
@@ -84,6 +89,9 @@ const mapDispatchToProps = ((dispatch) => ({
   },
   openSortListAction(bool) {
     dispatch(openSortList(bool));
+  },
+  changeFavoriteStatusAction(id, num) {
+    dispatch(changeFavorite(id, num));
   }
 }));
 

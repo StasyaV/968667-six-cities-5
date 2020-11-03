@@ -5,7 +5,7 @@ import CommentList from "../comment-list/comment-list";
 import NewCommentForm from "../new-comment-form/new-comment-form";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
-import {fetchCommentsList, fetchNearbyOffersList} from "../../store/api-actions";
+import {fetchCommentsList, fetchNearbyOffersList, changeFavorite} from "../../store/api-actions";
 import {AuthorizationStatus} from "../../const";
 
 class OfferScreen extends PureComponent {
@@ -14,10 +14,10 @@ class OfferScreen extends PureComponent {
   }
 
   componentWillMount() {
-    const {offers, loadCommentsAction, loadNearbyOffersAction} = this.props;
+    const {offer, loadCommentsAction, loadNearbyOffersAction} = this.props;
 
-    this._getAdditionalData(loadCommentsAction, offers[0].id);
-    this._getAdditionalData(loadNearbyOffersAction, offers[0].id);
+    this._getAdditionalData(loadCommentsAction, offer.id);
+    this._getAdditionalData(loadNearbyOffersAction, offer.id);
   }
 
   _getAdditionalData(func, id) {
@@ -25,12 +25,15 @@ class OfferScreen extends PureComponent {
   }
 
   render() {
-    const {offers, comments, nearbyOffers, activeOfferId, authorizationStatus} = this.props;
-    const offer = offers.find((item) => item.id === +activeOfferId);
+    const {offer, comments, nearbyOffers, authorizationStatus, changeFavoriteStatusAction} = this.props;
+
+    const onFavoriteButtonClick = () => {
+      changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
+    };
 
     return (
       <main className="page__main page__main--property">
-        <section className="property">
+        <section className="property" id={offer.id}>
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {offer.detailedImages.map((img, index) =>
@@ -52,21 +55,12 @@ class OfferScreen extends PureComponent {
                 <h1 className="property__name">
                   {offer.name}
                 </h1>
-                {offer.isFavorite
-                  ?
-                  <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">In bookmarks</span>
-                  </button>
-                  :
-                  <button className="place-card__bookmark-button button" type="button">
-                    <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>}
+                <button onClick={onFavoriteButtonClick} className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+                  <svg className="place-card__bookmark-icon" width="18" height="19">
+                    <use xlinkHref="#icon-bookmark"></use>
+                  </svg>
+                  <span className="visually-hidden">{offer.isFavorite ? `In bookmarks` : `To bookmarks`}</span>
+                </button>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -134,7 +128,8 @@ class OfferScreen extends PureComponent {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={nearbyOffers} />
+              <OfferList offers={nearbyOffers} authorizationStatus={authorizationStatus}
+                changeFavoriteStatusAction={changeFavoriteStatusAction}/>
             </div>
           </section>
         </div>
@@ -145,19 +140,17 @@ class OfferScreen extends PureComponent {
 
 
 OfferScreen.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offer: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
   nearbyOffers: PropTypes.array.isRequired,
   loadCommentsAction: PropTypes.func.isRequired,
   loadNearbyOffersAction: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({CITIES, OFFERS, ACTIONS, USER}) => ({
+const mapStateToProps = ({CITIES, ACTIONS, USER}) => ({
   city: CITIES.city,
-  offers: OFFERS.offers,
-  activeOfferId: ACTIONS.activeOfferId,
   comments: ACTIONS.comments,
   nearbyOffers: ACTIONS.nearbyOffers,
   authorizationStatus: USER.authorizationStatus
@@ -170,6 +163,9 @@ const mapDispatchToProps = ((dispatch) => ({
   loadNearbyOffersAction(offerId) {
     dispatch(fetchNearbyOffersList(offerId));
   },
+  changeFavoriteStatusAction(id, num) {
+    dispatch(changeFavorite(id, num));
+  }
 }));
 
 export {OfferScreen};
