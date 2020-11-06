@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 import {AuthorizationStatus} from "../../const";
 import history from "../../browser-history";
 
@@ -13,6 +12,10 @@ const OfferCard = (props) => {
     }
 
     changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
+  };
+
+  const onTitleClick = () => {
+    history.push(`/offer/${offer.id}`);
   };
 
   return (
@@ -49,9 +52,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>
-            {offer.name}
-          </Link>
+          <a onClick={onTitleClick} href="#">{offer.name}</a>
         </h2>
         <p className="place-card__type">{offer.roomType}</p>
       </div>

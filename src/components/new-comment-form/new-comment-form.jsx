@@ -123,5 +123,5 @@ const mapDispatchToProps = ((dispatch) => ({
   }
 }));
 
-export const form = withForm(NewCommentForm);
+export {NewCommentForm};
 export default connect(mapStateToProps, mapDispatchToProps)(withForm(NewCommentForm));

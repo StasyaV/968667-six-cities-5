@@ -13,7 +13,7 @@ class OfferScreen extends PureComponent {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {offer, loadCommentsAction, loadNearbyOffersAction} = this.props;
 
     this._getAdditionalData(loadCommentsAction, offer.id);

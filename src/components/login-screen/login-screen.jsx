@@ -1,8 +1,8 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import history from "../../browser-history";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
-import {Redirect} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 class LoginScreen extends PureComponent {
@@ -30,7 +30,7 @@ class LoginScreen extends PureComponent {
     const {city, authorizationStatus} = this.props;
 
     if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return <Redirect to={`/`} />;
+      return history.push(`/`);
     }
 
     return (
