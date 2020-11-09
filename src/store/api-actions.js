@@ -7,22 +7,22 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
     .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient))))
 );
-
+//
 export const fetchCommentsList = (offerId) => (dispatch, _getState, api) => (
   api.get(`/comments/${offerId}`)
     .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
 );
-
+//
 export const fetchNearbyOffersList = (offerId) => (dispatch, _getState, api) => (
   api.get(`/hotels/${offerId}/nearby`)
     .then(({data}) => dispatch(loadNearbyOffers(data.map(adaptOfferToClient))))
 );
-
+//
 export const fetchFavoriteOffersList = () => (dispatch, _getState, api) => (
   api.get(`/favorite`)
     .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient))))
 );
-
+//
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
@@ -45,7 +45,7 @@ export const changeFavorite = (offerId, status) => (dispatch, _getState, api) =>
     .then(api.get(`/favorite`)
     .then(({data}) => dispatch(loadFavoriteOffers(data.map(adaptOfferToClient)))));
 };
-
+//
 export const sendComment = ({comment, rating}, offerId) => (dispatch, _getState, api) => {
   api.post(`/comments/${offerId}`, {comment, rating})
   .then(({data}) => dispatch(loadComments(data.map(adaptCommentToClient))))
