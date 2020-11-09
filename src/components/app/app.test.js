@@ -5,6 +5,7 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../browser-history";
+import {cities} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -14,6 +15,7 @@ export const offers = [
     city: `Amsterdam`,
     coordinates: [52.3909553943508, 4.85309666406198],
     сityZoom: 10,
+    mapZoom: 8,
     name: `Hotel - 0`,
     img: `img/apartment-small-03.jpg`,
     detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
@@ -38,6 +40,7 @@ export const offers = [
     city: `Amsterdam`,
     coordinates: [52.3909553943508, 4.85309666406198],
     сityZoom: 10,
+    mapZoom: 8,
     name: `Hotel - 1`,
     img: `img/apartment-small-03.jpg`,
     detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
@@ -62,6 +65,7 @@ export const offers = [
     city: `Amsterdam`,
     coordinates: [52.3909553943508, 4.85309666406198],
     сityZoom: 10,
+    mapZoom: 8,
     name: `Hotel - 2`,
     img: `img/apartment-small-03.jpg`,
     detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
@@ -84,6 +88,7 @@ export const offers = [
   {
     id: 3,
     city: `Amsterdam`,
+    mapZoom: 8,
     coordinates: [52.3909553943508, 4.85309666406198],
     сityZoom: 10,
     name: `Hotel - 3`,
@@ -108,7 +113,24 @@ export const offers = [
 ];
 
 describe(`App render`, () => {
-  const initialState = {};
+  const initialState = {
+    CITIES: {
+      city: `Amsterdam`,
+      cities
+    },
+    ACTIONS: {
+      currentSort: `Popular`,
+      openSort: false,
+      activeOfferId: `0`
+    },
+    OFFERS: {
+      offers
+    },
+    USER: {
+      authorizationStatus: `NO_AUTH`,
+      email: `Oliver.conner@gmail.com`
+    }
+  };
   const store = mockStore(initialState);
   it(`App render`, () => {
     const tree = renderer

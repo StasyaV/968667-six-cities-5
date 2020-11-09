@@ -57,9 +57,9 @@ exports[`CommentList render Should Comment render correctly 1`] = `
       </p>
       <time
         className="reviews__time"
-        dateTime={1604673721715}
+        dateTime="2019-05-08T14:13:56.569Z"
       >
-        November 06
+        May 08
       </time>
     </div>
   </li>
@@ -116,9 +116,9 @@ exports[`CommentList render Should Comment render correctly 1`] = `
       </p>
       <time
         className="reviews__time"
-        dateTime={1604673721715}
+        dateTime="2019-05-08T14:13:56.569Z"
       >
-        November 06
+        May 08
       </time>
     </div>
   </li>

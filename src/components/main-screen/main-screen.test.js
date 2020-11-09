@@ -12,7 +12,20 @@ const mockStore = configureStore([]);
 const noop = () => {};
 
 describe(`MainScreen render`, () => {
-  const initialState = {};
+  const initialState = {
+    CITIES: {
+      city: `Amsterdam`,
+      cities
+    },
+    ACTIONS: {
+      currentSort: `Popular`,
+      openSort: false,
+      activeOfferId: `0`
+    },
+    OFFERS: {
+      offers
+    }
+  };
   const store = mockStore(initialState);
   it(`Should MainScreen render correctly`, () => {
     const tree = renderer

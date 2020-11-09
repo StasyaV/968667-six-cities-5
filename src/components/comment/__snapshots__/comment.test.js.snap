@@ -54,10 +54,135 @@ exports[`Comment render Should Comment render correctly 1`] = `
     </p>
     <time
       className="reviews__time"
-      dateTime={1604673570164}
+      dateTime="2019-05-08T14:13:56.569Z"
     >
-      November 06
+      May 08
     </time>
   </div>
 </li>
+`;
+
+exports[`CommentList render Should Comment render correctly 1`] = `
+<ul
+  className="reviews__list"
+>
+  <li
+    className="reviews__item"
+  >
+    <div
+      className="reviews__user user"
+    >
+      <div
+        className="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          className="reviews__avatar user__avatar"
+          height="54"
+          src="img/avatar-max.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        className="reviews__user-name"
+      >
+        Alexa
+      </span>
+    </div>
+    <div
+      className="reviews__info"
+    >
+      <div
+        className="reviews__rating rating"
+      >
+        <div
+          className="reviews__stars rating__stars"
+        >
+          <span
+            style={
+              Object {
+                "width": "80%",
+              }
+            }
+          />
+          <span
+            className="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        className="reviews__text"
+      >
+        Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.
+      </p>
+      <time
+        className="reviews__time"
+        dateTime="2019-05-08T14:13:56.569Z"
+      >
+        May 08
+      </time>
+    </div>
+  </li>
+  <li
+    className="reviews__item"
+  >
+    <div
+      className="reviews__user user"
+    >
+      <div
+        className="reviews__avatar-wrapper user__avatar-wrapper"
+      >
+        <img
+          alt="Reviews avatar"
+          className="reviews__avatar user__avatar"
+          height="54"
+          src="img/avatar-max.jpg"
+          width="54"
+        />
+      </div>
+      <span
+        className="reviews__user-name"
+      >
+        Alexa
+      </span>
+    </div>
+    <div
+      className="reviews__info"
+    >
+      <div
+        className="reviews__rating rating"
+      >
+        <div
+          className="reviews__stars rating__stars"
+        >
+          <span
+            style={
+              Object {
+                "width": "80%",
+              }
+            }
+          />
+          <span
+            className="visually-hidden"
+          >
+            Rating
+          </span>
+        </div>
+      </div>
+      <p
+        className="reviews__text"
+      >
+        Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.
+      </p>
+      <time
+        className="reviews__time"
+        dateTime="2019-05-08T14:13:56.569Z"
+      >
+        May 08
+      </time>
+    </div>
+  </li>
+</ul>
 `;

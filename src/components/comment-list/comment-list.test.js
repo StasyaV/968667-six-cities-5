@@ -2,14 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import CommentList from "./comment-list";
 
-const comments = [
+export const comments = [
   {
     id: 1,
     avatar: `img/avatar-max.jpg`,
     author: `Alexa`,
     rating: 4,
     text: `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
-    date: Date.now()
+    date: `2019-05-08T14:13:56.569Z`
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const comments = [
     author: `Alexa`,
     rating: 4,
     text: `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
-    date: Date.now()
+    date: `2019-05-08T14:13:56.569Z`
   }
 ];
 
