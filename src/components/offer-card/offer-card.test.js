@@ -11,6 +11,7 @@ describe(`OfferCard render`, () => {
       offer={offers[0]}
       authorizationStatus={`AUTH`}
       changeFavoriteStatusAction={noop}
+      updateActiveOfferIdAction={noop}
     />)
     .toJSON();
 

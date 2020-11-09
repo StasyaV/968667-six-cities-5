@@ -98,7 +98,6 @@ exports[`OfferList render Should OfferList render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
           onClick={[Function]}
         >
           Hotel - 0
@@ -203,7 +202,6 @@ exports[`OfferList render Should OfferList render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
           onClick={[Function]}
         >
           Hotel - 1
@@ -308,7 +306,6 @@ exports[`OfferList render Should OfferList render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
           onClick={[Function]}
         >
           Hotel - 2
@@ -413,7 +410,6 @@ exports[`OfferList render Should OfferList render correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
           onClick={[Function]}
         >
           Hotel - 3

@@ -1,6 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {App} from "./app";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
+import history from "../../browser-history";
+
+const mockStore = configureStore([]);
 
 export const offers = [
   {
@@ -101,12 +107,18 @@ export const offers = [
   },
 ];
 
-describe(`Render App`, () => {
+describe(`App render`, () => {
+  const initialState = {};
+  const store = mockStore(initialState);
   it(`App render`, () => {
     const tree = renderer
       .create(
-          <App offers={offers} />
-          , {
+          <Provider store={store}>
+            <Router history={history}>
+              <App offers={offers} />
+            </Router>
+          </Provider>,
+          {
             createNodeMock: () => {
               return {};
             }

@@ -27,6 +27,7 @@ const OfferList = (props) => {
           offer={offer}
           authorizationStatus={authorizationStatus}
           changeFavoriteStatusAction={changeFavoriteStatusAction}
+          updateActiveOfferIdAction={updateActiveOfferIdAction}
         />
       ))}
     </div>

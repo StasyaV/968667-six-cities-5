@@ -2,7 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {OfferScreen} from "./offer-screen";
 import {offers} from "../app/app.test";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
+import history from "../../browser-history";
 
+const mockStore = configureStore([]);
 const noop = () => {};
 const comments = [
   {
@@ -24,22 +29,32 @@ const comments = [
 ];
 
 describe(`OfferScreen render`, () => {
+  const initialState = {
+    activeOfferId: `0`
+  };
+  const store = mockStore(initialState);
   it(`Should OfferScreen render correctly`, () => {
     const tree = renderer
-    .create(<OfferScreen
-      offer={offers[0]}
-      loadCommentsAction={noop}
-      loadNearbyOffersAction={noop}
-      authorizationStatus={`AUTH`}
-      changeFavoriteStatusAction={noop}
-      nearbyOffers={offers}
-      comments={comments}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }
+    .create(
+        <Provider store={store}>
+          <Router history={history}>
+            <OfferScreen
+              offer={offers[0]}
+              loadCommentsAction={noop}
+              loadNearbyOffersAction={noop}
+              authorizationStatus={`AUTH`}
+              changeFavoriteStatusAction={noop}
+              nearbyOffers={offers}
+              comments={comments}
+              updateActiveOfferIdAction={noop}
+            />
+          </Router>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 

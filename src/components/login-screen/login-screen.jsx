@@ -26,12 +26,15 @@ class LoginScreen extends PureComponent {
     });
   }
 
-  render() {
-    const {city, authorizationStatus} = this.props;
-
+  componentDidMount() {
+    const {authorizationStatus} = this.props;
     if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return history.push(`/`);
+      history.push(`/`);
     }
+  }
+
+  render() {
+    const {city} = this.props;
 
     return (
       <main className="page__main page__main--login">

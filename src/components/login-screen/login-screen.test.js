@@ -1,22 +1,32 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {LoginScreen} from "./login-screen";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
+import history from "../../browser-history";
 
+const mockStore = configureStore([]);
 const noop = () => {};
 
 describe(`LoginScreen render`, () => {
+  const initialState = {};
+  const store = mockStore(initialState);
   it(`Should LoginScreen render correctly`, () => {
     const tree = renderer
-    .create(<LoginScreen
-      city={`Amsterdam`}
-      authorizationStatus={`AUTH`}
-      onSubmit={noop}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }
+    .create(
+        <Provider store={store}>
+          <Router history={history}>
+            <LoginScreen onSubmit={noop}
+              authorizationStatus={`AUTH`}
+              city={`Amsterdam`} />
+          </Router>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 
@@ -25,16 +35,19 @@ describe(`LoginScreen render`, () => {
 
   it(`Should LoginScreen render correctly with NO-Auth status`, () => {
     const tree = renderer
-    .create(<LoginScreen
-      city={`Amsterdam`}
-      authorizationStatus={`NO_AUTH`}
-      onSubmit={noop}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }
+    .create(
+        <Provider store={store}>
+          <Router history={history}>
+            <LoginScreen onSubmit={noop}
+              authorizationStatus={`NO_AUTH`}
+              city={`Amsterdam`}/>
+          </Router>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 

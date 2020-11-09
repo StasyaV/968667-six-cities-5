@@ -73,21 +73,4 @@ describe(`MainContentWithOffers render`, () => {
 
     expect(tree).toMatchSnapshot();
   });
-  it(`Should MainContentWithOffers witout offers render correctly`, () => {
-    const tree = renderer
-    .create(<MainContentWithOffers
-      city={`Amsterdam`}
-      cities={cities}
-      offers={[]}
-      sort={`Popular`}
-      updateActiveOfferIdAction={noop}
-      openSort={false}
-      openSortListAction={noop}
-      authorizationStatus={`AUTH`}
-      changeFavoriteStatusAction={noop}
-    />)
-    .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
 });

@@ -7,6 +7,7 @@ import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import {fetchCommentsList, fetchNearbyOffersList, changeFavorite} from "../../store/api-actions";
 import {AuthorizationStatus} from "../../const";
+import {updateActiveOfferId} from "../../store/action";
 
 class OfferScreen extends PureComponent {
   constructor(props) {
@@ -25,7 +26,7 @@ class OfferScreen extends PureComponent {
   }
 
   render() {
-    const {offer, comments, nearbyOffers, authorizationStatus, changeFavoriteStatusAction} = this.props;
+    const {offer, comments, nearbyOffers, authorizationStatus, changeFavoriteStatusAction, updateActiveOfferIdAction} = this.props;
 
     const onFavoriteButtonClick = () => {
       changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
@@ -129,7 +130,7 @@ class OfferScreen extends PureComponent {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <OfferList offers={nearbyOffers} authorizationStatus={authorizationStatus}
-                changeFavoriteStatusAction={changeFavoriteStatusAction}/>
+                changeFavoriteStatusAction={changeFavoriteStatusAction} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
             </div>
           </section>
         </div>
@@ -147,6 +148,7 @@ OfferScreen.propTypes = {
   loadNearbyOffersAction: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
+  updateActiveOfferIdAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({CITIES, ACTIONS, USER}) => ({
@@ -165,6 +167,9 @@ const mapDispatchToProps = ((dispatch) => ({
   },
   changeFavoriteStatusAction(id, num) {
     dispatch(changeFavorite(id, num));
+  },
+  updateActiveOfferIdAction(id) {
+    dispatch(updateActiveOfferId(id));
   }
 }));
 

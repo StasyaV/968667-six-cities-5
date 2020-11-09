@@ -4,7 +4,7 @@ import {AuthorizationStatus} from "../../const";
 import history from "../../browser-history";
 
 const OfferCard = (props) => {
-  const {offer, authorizationStatus, changeFavoriteStatusAction} = props;
+  const {offer, authorizationStatus, changeFavoriteStatusAction, updateActiveOfferIdAction} = props;
 
   const onFavoriteButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -16,6 +16,7 @@ const OfferCard = (props) => {
 
   const onTitleClick = () => {
     history.push(`/offer/${offer.id}`);
+    updateActiveOfferIdAction(`${offer.id}`);
   };
 
   return (
@@ -52,7 +53,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onTitleClick} href="#">{offer.name}</a>
+          <a onClick={onTitleClick}>{offer.name}</a>
         </h2>
         <p className="place-card__type">{offer.roomType}</p>
       </div>
@@ -74,6 +75,7 @@ OfferCard.propTypes = {
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
+  updateActiveOfferIdAction: PropTypes.func.isRequired,
 };
 
 export default OfferCard;
