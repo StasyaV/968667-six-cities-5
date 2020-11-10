@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {MainScreen} from "./main-screen";
 import {cities} from "../../const";
-import {offers} from "../app/app.test";
+import {offers} from "../../mocks/offers";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";

@@ -5,11 +5,10 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../browser-history";
+import {cities} from "../../const";
 
 const mockStore = configureStore([]);
 const noop = () => {};
-const currentCity = `Amsterdam`;
-const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 describe(`CitiesList render`, () => {
   const initialState = {};
@@ -21,7 +20,7 @@ describe(`CitiesList render`, () => {
           <Router history={history}>
             <CitiesList
               cities={cities}
-              currentCity={currentCity}
+              currentCity={cities[0]}
               changeCityAction={noop}
             />
           </Router>

@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Comment from "./comment";
-import {comments} from "../comment-list/comment-list.test";
+import {comments} from "../../mocks/offers";
 
 describe(`Comment render`, () => {
   it(`Should Comment render correctly`, () => {

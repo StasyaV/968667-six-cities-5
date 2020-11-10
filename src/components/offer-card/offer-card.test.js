@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OfferCard from "./offer-card";
-import {offers} from "../app/app.test";
+import {offers} from "../../mocks/offers";
 
 const noop = () => {};
 describe(`OfferCard render`, () => {

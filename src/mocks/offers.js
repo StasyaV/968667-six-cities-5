@@ -1,90 +1,246 @@
-import {getRandomNumber} from "../utils/utils.js";
-import {roomTypes} from "../const.js";
+import {adaptCommentToClient, adaptOfferToClient} from "../utils/utils";
 
-const MAX_RATING_VALUE = 5;
-const MAX_COUNT_BEDROOMS = 5;
-const MAX_COUNT_GUESTS = 5;
-const descriptionList = [
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-  `Cras aliquet varius magna, non porta ligula feugiat eget.`,
-  `Fusce tristique felis at fermentum pharetra.`,
-  `Aliquam id orci ut lectus varius viverra.`,
-  `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
-  `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
-  `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
-  `Sed sed nisi sed augue convallis suscipit in sed felis.`,
-  `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
-  `In rutrum ac purus sit amet tempus.`
-];
-const names = [`Ivan`, `Alex`, `Nick`, `Simon`, `Damon`, `Damien`, `Jan`];
-const features = [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`];
-const imgLinks = [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`];
-const coordinatesList = [[52.3909553943508, 4.85309666406198], [52.369553943508, 4.85309666406198], [52.3909553943508, 4.929309666406198], [52.3809553943508, 4.939309666406198]];
-
-const generateFeaturesLength = () => {
-  return getRandomNumber(1, 5);
-};
-
-const generateFeaturesList = () => {
-  let featuresList = [];
-  for (let i = 0; i < generateFeaturesLength(); i++) {
-    featuresList.push(features[i]);
+export const serverOffers = [
+  {
+    "bedrooms": 3,
+    "city": {
+      "location": {
+        "latitude": 52.370216,
+        "longitude": 4.895168,
+        "zoom": 10
+      },
+      "name": `Amsterdam`
+    },
+    "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    "host": {
+      "avatar_url": `img/1.png`,
+      "id": 3,
+      "is_pro": true,
+      "name": `Angelina`
+    },
+    "id": 1,
+    "images": [`img/1.png`, `img/2.png`],
+    "is_favorite": false,
+    "is_premium": false,
+    "location": {
+      "latitude": 52.35514938496378,
+      "longitude": 4.673877537499948,
+      "zoom": 8
+    },
+    "max_adults": 4,
+    "preview_image": `img/1.png`,
+    "price": 120,
+    "rating": 4.8,
+    "title": `Beautiful & luxurious studio at great location`,
+    "type": `apartment`
+  },
+  {
+    "bedrooms": 4,
+    "city": {
+      "location": {
+        "latitude": 52.370216,
+        "longitude": 4.895168,
+        "zoom": 10
+      },
+      "name": `Amsterdam`
+    },
+    "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    "host": {
+      "avatar_url": `img/1.png`,
+      "id": 3,
+      "is_pro": true,
+      "name": `Angelina`
+    },
+    "id": 2,
+    "images": [`img/1.png`, `img/2.png`],
+    "is_favorite": false,
+    "is_premium": true,
+    "location": {
+      "latitude": 52.35514938496378,
+      "longitude": 4.673877537499948,
+      "zoom": 8
+    },
+    "max_adults": 4,
+    "preview_image": `img/1.png`,
+    "price": 100,
+    "rating": 4.8,
+    "title": `Beautiful & luxurious studio at great location`,
+    "type": `apartment`
   }
-  return featuresList;
-};
+];
 
-export const generateDate = () => {
-  const maxDaysGap = getRandomNumber(1, 365);
-  const daysGap = getRandomNumber(-maxDaysGap, maxDaysGap);
-  const currentDate = new Date();
-
-  currentDate.setHours(23, 59, 59, 999);
-
-  currentDate.setDate(currentDate.getDate() + daysGap);
-
-  return new Date(currentDate);
-};
-
-export const getComment = (value, index) => {
-  const comment = {
-    id: index,
-    avatar: `img/avatar-max.jpg`,
-    author: names[getRandomNumber(0, names)],
-    rating: getRandomNumber(0, MAX_RATING_VALUE),
-    text: descriptionList[getRandomNumber(0, descriptionList.length)],
-    date: generateDate()
-  };
-  return comment;
-};
-
-export const generateComments = () => {
-  return new Array(getRandomNumber(0, 10)).fill().map(getComment);
-};
-
-export const getOffer = (value, index) => {
-  const comments = generateComments();
-  const offer = {
-    id: index,
-    city: `Amsterdam`,
-    coordinates: coordinatesList[index],
-    name: `Hotel - ${index}`,
-    img: imgLinks[getRandomNumber(0, imgLinks.length)],
-    detailedImages: (imgLinks > 6) ? imgLinks.slice(0, 6) : imgLinks,
-    price: getRandomNumber(10, 100),
-    roomType: roomTypes[getRandomNumber(0, roomTypes.length)],
-    bedroomsCount: getRandomNumber(1, MAX_COUNT_BEDROOMS),
-    guestsCount: getRandomNumber(1, MAX_COUNT_GUESTS),
-    description: descriptionList[getRandomNumber(0, descriptionList.length)],
-    comments,
-    isFavorite: Boolean(getRandomNumber(0, 2)),
-    isPopular: Boolean(getRandomNumber(0, 2)),
-    isPremium: Boolean(getRandomNumber(0, 2)),
-    features: generateFeaturesList(),
-    owner: {
-      name: names[getRandomNumber(0, names.length)],
-      avatar: `img/avatar-angelina.jpg`,
-      isSUper: Boolean(getRandomNumber(0, 2))
+export const serverComments = [
+  {
+    "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    "date": `2019-05-08T14:13:56.569Z`,
+    "id": 1,
+    "rating": 4,
+    "user": {
+      "avatar_url": `img/1.png`,
+      "id": 4,
+      "is_pro": false,
+      "name": `Max`
     }
-  };
-  return offer;
+  },
+  {
+    "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    "date": `2019-05-08T14:13:56.569Z`,
+    "id": 2,
+    "rating": 4,
+    "user": {
+      "avatar_url": `img/1.png`,
+      "id": 4,
+      "is_pro": false,
+      "name": `Max`
+    }
+  }
+];
+
+export const commentData = {
+  "comment": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  "rating": 4
+};
+
+export const offers = [
+  {
+    id: 0,
+    city: `Amsterdam`,
+    cityCoordinates: [52.3909553943508, 4.85309666406198],
+    coordinates: [52.3909553943508, 4.85309666406198],
+    сityZoom: 10,
+    detailsMapZoom: 8,
+    name: `Hotel - 0`,
+    img: `img/apartment-small-03.jpg`,
+    detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
+    price: 100,
+    roomType: `hotel`,
+    bedroomsCount: 1,
+    guestsCount: 2,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    isFavorite: false,
+    isPopular: false,
+    isPremium: true,
+    features: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`],
+    rating: 4,
+    owner: {
+      name: `Angelina`,
+      avatar: `img/avatar-angelina.jpg`,
+      isSUper: true
+    }
+  },
+  {
+    id: 1,
+    city: `Amsterdam`,
+    cityCoordinates: [52.3909553943508, 4.85309666406198],
+    coordinates: [52.3909553943508, 4.85309666406198],
+    сityZoom: 10,
+    detailsMapZoom: 8,
+    name: `Hotel - 1`,
+    img: `img/apartment-small-03.jpg`,
+    detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
+    price: 100,
+    roomType: `hotel`,
+    bedroomsCount: 1,
+    guestsCount: 2,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    isFavorite: false,
+    isPopular: false,
+    isPremium: true,
+    rating: 4,
+    features: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`],
+    owner: {
+      name: `Angelina`,
+      avatar: `img/avatar-angelina.jpg`,
+      isSUper: true
+    }
+  },
+  {
+    id: 2,
+    city: `Amsterdam`,
+    cityCoordinates: [52.3909553943508, 4.85309666406198],
+    coordinates: [52.3909553943508, 4.85309666406198],
+    сityZoom: 10,
+    detailsMapZoom: 8,
+    name: `Hotel - 2`,
+    img: `img/apartment-small-03.jpg`,
+    detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
+    price: 100,
+    roomType: `hotel`,
+    bedroomsCount: 1,
+    guestsCount: 2,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    isFavorite: false,
+    isPopular: false,
+    isPremium: true,
+    rating: 4,
+    features: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`],
+    owner: {
+      name: `Angelina`,
+      avatar: `img/avatar-angelina.jpg`,
+      isSUper: true
+    }
+  },
+  {
+    id: 3,
+    city: `Amsterdam`,
+    cityCoordinates: [52.3909553943508, 4.85309666406198],
+    coordinates: [52.3909553943508, 4.85309666406198],
+    сityZoom: 10,
+    detailsMapZoom: 8,
+    name: `Hotel - 3`,
+    img: `img/apartment-small-03.jpg`,
+    detailedImages: [`img/apartment-small-03.jpg`, `img/apartment-small-04.jpg`, `img/room-small.jpg`, `img/studio-photos.jpg`],
+    price: 100,
+    roomType: `hotel`,
+    bedroomsCount: 1,
+    guestsCount: 2,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    isFavorite: false,
+    isPopular: false,
+    isPremium: true,
+    rating: 4,
+    features: [`Wifi`, `Heating`, `Kitchen`, `Cable TV`, `Own bathroom`, `Hair-dryer`, `AC`],
+    owner: {
+      name: `Angelina`,
+      avatar: `img/avatar-angelina.jpg`,
+      isSUper: true
+    }
+  },
+];
+
+export const comments = [
+  {
+    id: 1,
+    avatar: `img/avatar-max.jpg`,
+    author: `Alexa`,
+    rating: 4,
+    text: `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
+    date: `2019-05-08T14:13:56.569Z`
+  },
+  {
+    id: 2,
+    avatar: `img/avatar-max.jpg`,
+    author: `Alexa`,
+    rating: 4,
+    text: `Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.`,
+    date: `2019-05-08T14:13:56.569Z`
+  }
+];
+
+export const adaptedOffers = serverOffers.slice().map((offer) => adaptOfferToClient(offer));
+export const adaptedComments = serverComments.slice().map((comment) => adaptCommentToClient(comment));
+
+export const userData = {
+  email: `Oliver.conner@gmail.com`,
+  password: `12345678`
+};
+
+export const authInfo = {
+  "avatar_url": `img/1.png`,
+  "email": `Oliver.conner@gmail.com`,
+  "id": 1,
+  "is_pro": false,
+  "name": `Oliver.conner`
 };

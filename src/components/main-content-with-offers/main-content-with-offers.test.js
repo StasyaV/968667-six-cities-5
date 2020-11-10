@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MainContentWithOffers from "./main-content-with-offers";
-import {cities} from "../../const";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../browser-history";
-import {offers} from "../app/app.test";
+import {offers} from "../../mocks/offers";
+import {cities} from "../../const";
 
 const mockStore = configureStore([]);
 const noop = () => {};

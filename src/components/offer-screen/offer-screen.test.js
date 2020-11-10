@@ -5,8 +5,7 @@ import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../browser-history";
 import {OfferScreen} from "./offer-screen";
-import {offers} from "../app/app.test";
-import {comments} from "../comment-list/comment-list.test";
+import {offers, comments} from "../../mocks/offers";
 
 const mockStore = configureStore([]);
 const noop = () => {};

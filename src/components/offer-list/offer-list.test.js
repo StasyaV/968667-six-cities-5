@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OfferList from "./offer-list";
-import {offers} from "../app/app.test";
+import {offers} from "../../mocks/offers";
 
 const noop = () => {};
 
