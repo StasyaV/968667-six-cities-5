@@ -139,11 +139,7 @@ describe(`Testing related to offers async operations`, () => {
 
     return changeFavoriteStatus(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.CHANGE_FAVORITE_STATUS,
-          payload: adaptedOffers,
-        });
+        expect(dispatch).toHaveBeenCalledTimes(2);
       });
   });
 

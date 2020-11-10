@@ -25,9 +25,11 @@ export const fetchFavoriteOffersList = () => (dispatch, _getState, api) => {
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => {
   return api.post(`/login`, {email, password})
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(saveUserEmail(email)))
-    .then(() => dispatch(redirectToRoute(`/`)));
+    .then(({data}) => {
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(saveUserEmail(data.email));
+      dispatch(redirectToRoute(`/`));
+    });
 };
 
 export const changeFavorite = (offerId, status) => (dispatch, _getState, api) => {
