@@ -40,7 +40,7 @@ exports[`LoginScreen render Should LoginScreen render correctly 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                click={[Function]}
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -178,7 +178,7 @@ exports[`LoginScreen render Should LoginScreen render correctly with NO-Auth sta
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                click={[Function]}
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"

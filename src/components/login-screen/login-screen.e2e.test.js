@@ -8,9 +8,9 @@ Enzyme.configure({
 });
 
 describe(`LoginScreen testing`, () => {
-  const onSubmit = jest.fn();
 
   it(`Submitting form with all relevant data calls callback`, () => {
+    const onSubmit = jest.fn();
     const wrapper = mount(
         <LoginScreen onSubmit={onSubmit}
           authorizationStatus={`NO_AUTH`}
@@ -31,6 +31,7 @@ describe(`LoginScreen testing`, () => {
   });
 
   it(`Submitting form with no data does not call callback`, () => {
+    const onSubmit = jest.fn();
     const wrapper = mount(
         <LoginScreen onSubmit={onSubmit}
           authorizationStatus={`NO_AUTH`}
@@ -48,6 +49,7 @@ describe(`LoginScreen testing`, () => {
   });
 
   it(`Submitting form with no pass does not call callback`, () => {
+    const onSubmit = jest.fn();
     const wrapper = mount(
         <LoginScreen onSubmit={onSubmit}
           authorizationStatus={`NO_AUTH`}
@@ -65,6 +67,7 @@ describe(`LoginScreen testing`, () => {
   });
 
   it(`Submitting form with no email does not call callback`, () => {
+    const onSubmit = jest.fn();
     const wrapper = mount(
         <LoginScreen onSubmit={onSubmit}
           authorizationStatus={`NO_AUTH`}
@@ -82,6 +85,7 @@ describe(`LoginScreen testing`, () => {
   });
 
   it(`Submitting form with irrelevant email does not call callback`, () => {
+    const onSubmit = jest.fn();
     const wrapper = mount(
         <LoginScreen onSubmit={onSubmit}
           authorizationStatus={`NO_AUTH`}

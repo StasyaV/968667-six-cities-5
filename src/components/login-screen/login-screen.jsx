@@ -54,7 +54,7 @@ class LoginScreen extends PureComponent {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a click={this.handleEmailClick} className="header__nav-link header__nav-link--profile">
+                    <a onClick={this.handleEmailClick} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__login">Sign in</span>
