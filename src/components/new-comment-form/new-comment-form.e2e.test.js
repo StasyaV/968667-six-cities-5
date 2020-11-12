@@ -14,9 +14,11 @@ describe(`NewCommentForm testing`, () => {
   it(`Submitting form with all relevant data calls callback`, () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
-        <NewCommentForm onSubmit={onSubmit}
+        <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
-          rating={``} comment={``} onRatingChange={noop} onCommentInputChange={noop}
+          rating={`4`}
+          comment={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`} 
+          onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
         />
     );
@@ -31,17 +33,17 @@ describe(`NewCommentForm testing`, () => {
     const form = wrapper.find(`form`);
 
     form.simulate(`submit`, {preventDefault: () => {}});
+    expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith({
       rating: `4`,
       comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-    });
-    expect(onSubmit).toHaveBeenCalledTimes(1);
+    }, `1`);
   });
 
   it(`Submitting form with no data does not call callback`, () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
-        <NewCommentForm onSubmit={onSubmit}
+        <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
           rating={``} comment={``} onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
@@ -63,9 +65,9 @@ describe(`NewCommentForm testing`, () => {
   it(`Submitting form with no comment does not call callback`, () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
-        <NewCommentForm onSubmit={onSubmit}
+        <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
-          rating={``} comment={``} onRatingChange={noop} onCommentInputChange={noop}
+          rating={`4`} comment={``} onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
         />
     );
@@ -87,9 +89,9 @@ describe(`NewCommentForm testing`, () => {
   it(`Submitting form with no rating does not call callback`, () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
-        <NewCommentForm onSubmit={onSubmit}
+        <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
-          rating={``} comment={``} onRatingChange={noop} onCommentInputChange={noop}
+          rating={``} comment={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`} onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
         />
     );
@@ -109,9 +111,9 @@ describe(`NewCommentForm testing`, () => {
   it(`Submitting form with irrelevant comment length does not call callback`, () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
-        <NewCommentForm onSubmit={onSubmit}
+        <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
-          rating={``} comment={``} onRatingChange={noop} onCommentInputChange={noop}
+          rating={`4`} comment={`A quiet cozy and picturesque.`} onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
         />
     );
