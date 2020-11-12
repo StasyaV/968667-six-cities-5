@@ -17,7 +17,7 @@ describe(`NewCommentForm testing`, () => {
         <NewCommentForm onCommentSubmit={onSubmit}
           offerId={`1`} resetState={noop}
           rating={`4`}
-          comment={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`} 
+          comment={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`}
           onRatingChange={noop} onCommentInputChange={noop}
           isErrorToSubmit={false} updateErrorStatusAction={noop}
         />

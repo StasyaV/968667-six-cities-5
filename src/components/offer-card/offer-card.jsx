@@ -78,4 +78,5 @@ OfferCard.propTypes = {
   updateActiveOfferIdAction: PropTypes.func.isRequired,
 };
 
+export {OfferCard};
 export default OfferCard;

@@ -41,4 +41,5 @@ OfferList.propTypes = {
   changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
+export {OfferList};
 export default OfferList;
