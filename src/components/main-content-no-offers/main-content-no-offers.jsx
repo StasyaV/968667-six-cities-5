@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CitiesList from "../citiesList/citiesList";
+import CitiesList from "../cities-list/cities-list";
 
 const MainContentNoOffers = (props) => {
   const {cities, city} = props;

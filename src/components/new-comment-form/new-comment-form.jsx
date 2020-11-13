@@ -19,10 +19,12 @@ class NewCommentForm extends PureComponent {
     const {onCommentSubmit, rating, comment, offerId, resetState} = this.props;
     evt.preventDefault();
 
-    onCommentSubmit({
-      comment,
-      rating
-    }, offerId);
+    if (comment.length > CommentLength.MIN && comment.length <= CommentLength.MAX && rating) {
+      onCommentSubmit({
+        comment,
+        rating
+      }, offerId);
+    }
 
     resetState();
     this.formRef.current.reset();
@@ -123,5 +125,5 @@ const mapDispatchToProps = ((dispatch) => ({
   }
 }));
 
-export const form = withForm(NewCommentForm);
+export {NewCommentForm};
 export default connect(mapStateToProps, mapDispatchToProps)(withForm(NewCommentForm));

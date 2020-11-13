@@ -6,7 +6,7 @@ const withForm = (Component) => {
       super(props);
 
       this.state = {
-        rating: `0`,
+        rating: ``,
         comment: ``
       };
 

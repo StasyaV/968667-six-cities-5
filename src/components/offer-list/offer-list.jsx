@@ -27,6 +27,7 @@ const OfferList = (props) => {
           offer={offer}
           authorizationStatus={authorizationStatus}
           changeFavoriteStatusAction={changeFavoriteStatusAction}
+          updateActiveOfferIdAction={updateActiveOfferIdAction}
         />
       ))}
     </div>
@@ -40,4 +41,5 @@ OfferList.propTypes = {
   changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
 
+export {OfferList};
 export default OfferList;

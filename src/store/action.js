@@ -1,6 +1,5 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  UPDATE_OFFERS: `UPDATE_OFFERS`,
   UPDATE_SORT: `UPDATE_SORT`,
   UPDATE_ACTIVE_ID: `UPDATE_ACTIVE_ID`,
   OPEN_SORT: `OPEN_SORT`,
@@ -19,11 +18,6 @@ export const ActionType = {
 export const changeCity = (city) => ({
   type: ActionType.CHANGE_CITY,
   payload: city,
-});
-
-export const updateOffers = () => ({
-  type: ActionType.UPDATE_OFFERS,
-  payload: []
 });
 
 export const updateSort = (sortType) => ({

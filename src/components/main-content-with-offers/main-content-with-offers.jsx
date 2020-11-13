@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CitiesList from "../citiesList/citiesList";
+import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
 import Sort from "../sort/sort";
