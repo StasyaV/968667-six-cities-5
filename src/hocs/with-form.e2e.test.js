@@ -29,6 +29,8 @@ describe(`withForm HOC`, () => {
       comment={`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`}
     />);
 
+    wrapper.instance()._handleRatingChange({target: {value: `4`}});
+    wrapper.instance()._handleTextFieldChange({target: {value: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`}});
     expect(wrapper.props().rating).toEqual(`4`);
     expect(wrapper.props().comment).toEqual(`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`);
   });
