@@ -12,6 +12,9 @@ describe(`FavoritesScreen render`, () => {
       favoriteOffers={offers}
       loadFavoriteOffersAction={noop}
       changeFavoriteStatusAction={noop}
+      updateActiveOfferIdAction={noop}
+      authorizationStatus={`AUTH`}
+      email={`Oliver.conner@gmail.com`}
     />, {
       createNodeMock: () => {
         return {};
@@ -28,6 +31,9 @@ describe(`FavoritesScreen render`, () => {
       favoriteOffers={[]}
       loadFavoriteOffersAction={noop}
       changeFavoriteStatusAction={noop}
+      updateActiveOfferIdAction={noop}
+      authorizationStatus={`AUTH`}
+      email={`Oliver.conner@gmail.com`}
     />, {
       createNodeMock: () => {
         return {};

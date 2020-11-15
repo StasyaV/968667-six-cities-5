@@ -23,7 +23,8 @@ describe(`OfferScreen render`, () => {
       offers
     },
     USER: {
-      isErrorToSubmit: false
+      isErrorToSubmit: false,
+      email: `Oliver.conner@gmail.com`
     }
   };
 
@@ -42,6 +43,7 @@ describe(`OfferScreen render`, () => {
               nearbyOffers={offers}
               comments={comments}
               updateActiveOfferIdAction={noop}
+              email={`Oliver.conner@gmail.com`}
             />
           </Router>
         </Provider>,

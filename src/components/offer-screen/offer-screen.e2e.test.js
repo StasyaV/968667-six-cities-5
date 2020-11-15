@@ -23,6 +23,7 @@ describe(`OfferScreen works correct`, () => {
           nearbyOffers={offers}
           comments={[]}
           updateActiveOfferIdAction={noop}
+          email={`Oliver.conner@gmail.com`}
         />
     );
 

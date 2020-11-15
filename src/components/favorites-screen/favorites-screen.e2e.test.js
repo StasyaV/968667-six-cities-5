@@ -19,6 +19,9 @@ describe(`Favorite button works correct`, () => {
           favoriteOffers={[offers[0]]}
           changeFavoriteStatusAction={changeFavoriteStatusAction}
           loadFavoriteOffersAction={noop}
+          updateActiveOfferIdAction={noop}
+          authorizationStatus={`AUTH`}
+          email={`Oliver.conner@gmail.com`}
         />
     );
 

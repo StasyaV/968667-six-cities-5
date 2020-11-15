@@ -9,6 +9,7 @@ const OfferCard = (props) => {
   const onFavoriteButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
       history.push(`/login`);
+      return;
     }
 
     changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);

@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
-import {fetchOffersList} from "./store/api-actions";
+import {fetchOffersList, checkAuth} from "./store/api-actions";
 import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
@@ -23,7 +23,8 @@ const store = createStore(
 );
 
 Promise.all([
-  store.dispatch(fetchOffersList())
+  store.dispatch(fetchOffersList()),
+  store.dispatch(checkAuth()),
 ])
   .then(() => {
     ReactDOM.render(

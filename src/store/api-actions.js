@@ -32,6 +32,15 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     });
 };
 
+export const checkAuth = () => (dispatch, _getState, api) => (
+  api.get(`/login`)
+    .then(({data}) => {
+      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(saveUserEmail(data.email));
+    })
+    .catch(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
+);
+
 export const changeFavorite = (offerId, status) => (dispatch, _getState, api) => {
   return api.post(`/favorite/${offerId}/${status}`)
     .then(() => {
