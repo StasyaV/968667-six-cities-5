@@ -60,8 +60,8 @@ const MainContentWithOffers = (props) => {
 };
 
 MainContentWithOffers.propTypes = {
-  offers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
   sort: PropTypes.string.isRequired,
   updateActiveOfferIdAction: PropTypes.func.isRequired,

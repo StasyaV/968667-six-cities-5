@@ -83,12 +83,12 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   mapClass: PropTypes.string.isRequired,
   activeOfferId: PropTypes.string.isRequired,
   mapZoom: PropTypes.number.isRequired,
-  coordinates: PropTypes.array.isRequired,
-  nearbyOffers: PropTypes.array,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  nearbyOffers: PropTypes.arrayOf(PropTypes.object),
   mainOffer: PropTypes.object,
 };
 

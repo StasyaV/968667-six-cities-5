@@ -181,8 +181,8 @@ class OfferScreen extends PureComponent {
 
 OfferScreen.propTypes = {
   offer: PropTypes.object.isRequired,
-  comments: PropTypes.array.isRequired,
-  nearbyOffers: PropTypes.array.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadCommentsAction: PropTypes.func.isRequired,
   loadNearbyOffersAction: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,

@@ -10,6 +10,12 @@ export const formatDate = (date) => {
   return moment(date).format(`MMMM DD`);
 };
 
+export const sortCommentsByDate = (comments) => {
+  comments.slice().sort((a, b) => {
+    return moment(a.date, `DD.MM.YY`) - moment(b.date, `DD.MM.YY`);
+  });
+};
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };

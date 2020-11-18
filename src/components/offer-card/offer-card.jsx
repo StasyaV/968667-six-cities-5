@@ -72,7 +72,7 @@ OfferCard.propTypes = {
     isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    comments: PropTypes.array,
+    comments: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,

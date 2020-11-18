@@ -150,7 +150,7 @@ class FavoritesScreen extends PureComponent {
 }
 
 FavoritesScreen.propTypes = {
-  favoriteOffers: PropTypes.array.isRequired,
+  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadFavoriteOffersAction: PropTypes.func.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
   updateActiveOfferIdAction: PropTypes.func.isRequired,

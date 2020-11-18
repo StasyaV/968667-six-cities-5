@@ -61,8 +61,8 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
   currentSort: PropTypes.string.isRequired,
   updateActiveOfferIdAction: PropTypes.func.isRequired,

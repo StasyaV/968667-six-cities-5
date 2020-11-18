@@ -29,7 +29,7 @@ const MainContentNoOffers = (props) => {
 };
 
 MainContentNoOffers.propTypes = {
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
 };
 

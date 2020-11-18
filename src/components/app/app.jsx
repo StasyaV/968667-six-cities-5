@@ -42,7 +42,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = ({OFFERS}) => ({
