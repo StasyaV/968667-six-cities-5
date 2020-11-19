@@ -12,7 +12,7 @@ export const formatDate = (date) => {
 
 export const sortCommentsByDate = (comments) => {
   return comments.slice().sort((a, b) => {
-    return b.date - a.date;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 };
 

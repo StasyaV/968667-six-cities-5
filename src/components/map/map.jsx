@@ -26,12 +26,12 @@ class Map extends PureComponent {
       nearbyOffers.forEach((offer) => {
         leaflet
           .marker(offer.coordinates, {icon})
-          .addTo(this._map);
+          .addTo(this._layerGroup);
       });
 
       leaflet
         .marker(mainOffer.coordinates, {icon: activeIcon})
-        .addTo(this._map);
+        .addTo(this._layerGroup);
 
       return;
     }
@@ -39,13 +39,13 @@ class Map extends PureComponent {
     otherOffers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon})
-        .addTo(this._map);
+        .addTo(this._layerGroup);
     });
 
     if (activeOffer.length) {
       leaflet
       .marker(activeOffer[0].coordinates, {icon: activeIcon})
-      .addTo(this._map);
+      .addTo(this._layerGroup);
     }
   }
 
@@ -58,13 +58,13 @@ class Map extends PureComponent {
       marker: true
     });
 
-    this._layerGroup = leaflet.layerGroup(this._map);
+    this._layerGroup = leaflet.layerGroup().addTo(this._map);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this._map);
+      .addTo(this._layerGroup);
 
     this._setMap();
   }
