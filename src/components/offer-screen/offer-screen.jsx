@@ -8,6 +8,7 @@ import Map from "../map/map";
 import {fetchCommentsList, fetchNearbyOffersList, changeFavorite} from "../../store/api-actions";
 import {AuthorizationStatus} from "../../const";
 import {updateActiveOfferId} from "../../store/action";
+import history from "../../browser-history";
 
 class OfferScreen extends PureComponent {
   constructor(props) {
@@ -39,6 +40,11 @@ class OfferScreen extends PureComponent {
       changeFavoriteStatusAction, updateActiveOfferIdAction, email, loadNearbyOffersAction} = this.props;
 
     const onFavoriteButtonClick = () => {
+      if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+        history.push(`/login`);
+        return;
+      }
+
       changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
     };
 
@@ -63,13 +69,13 @@ class OfferScreen extends PureComponent {
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
                     {authorizationStatus === AuthorizationStatus.NO_AUTH ?
-                      <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile" href="#">
+                      <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile">
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
                         <span className="header__login">Sign in</span>
                       </a>
                       :
-                      <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile" href="#">
+                      <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile">
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
                         <span className="header__user-name user__name">{email}</span>
@@ -178,7 +184,10 @@ class OfferScreen extends PureComponent {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
                 <OfferList offers={nearbyOffers} getUpdatedOffers={loadNearbyOffersAction} authorizationStatus={authorizationStatus}
-                  changeFavoriteStatusAction={changeFavoriteStatusAction} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
+                  changeFavoriteStatusAction={(id, num) => {
+                    changeFavoriteStatusAction(id, num);
+                    this._getAdditionalData(loadNearbyOffersAction, offer.id);
+                  }} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
               </div>
             </section>
           </div>
