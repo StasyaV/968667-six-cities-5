@@ -35,7 +35,8 @@ class OfferScreen extends PureComponent {
   }
 
   render() {
-    const {offer, comments, nearbyOffers, authorizationStatus, changeFavoriteStatusAction, updateActiveOfferIdAction, email} = this.props;
+    const {offer, comments, nearbyOffers, authorizationStatus,
+      changeFavoriteStatusAction, updateActiveOfferIdAction, email, loadNearbyOffersAction} = this.props;
 
     const onFavoriteButtonClick = () => {
       changeFavoriteStatusAction(offer.id, !offer.isFavorite ? 1 : 0);
@@ -176,7 +177,7 @@ class OfferScreen extends PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OfferList offers={nearbyOffers} authorizationStatus={authorizationStatus}
+                <OfferList offers={nearbyOffers} getUpdatedOffers={loadNearbyOffersAction} authorizationStatus={authorizationStatus}
                   changeFavoriteStatusAction={changeFavoriteStatusAction} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
               </div>
             </section>

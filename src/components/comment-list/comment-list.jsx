@@ -5,14 +5,13 @@ import {sortCommentsByDate} from "../../utils/utils";
 
 const CommentList = (props) => {
   const {comments} = props;
-  console.log(comments, `coments`);
   const getSortedComments = () => {
     if (comments.length > 0) {
       return sortCommentsByDate(comments);
     }
     return comments;
   };
-  console.log(getSortedComments(), `sortedComments`);
+
   return (
     <ul className="reviews__list">
       {getSortedComments().map((comment, index) => (

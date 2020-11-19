@@ -20,8 +20,7 @@ class Map extends PureComponent {
 
     this._map.flyTo(coordinates, mapZoom);
 
-    if (offers || mainOffer) {
-      console.log (mainOffer);
+    if (offers) {
       offers.forEach((offer) => {
         if (offer.id === +activeOfferId) {
           leaflet
@@ -34,9 +33,11 @@ class Map extends PureComponent {
         }
       });
 
-      leaflet
+      if (mainOffer) {
+        leaflet
         .marker(mainOffer.coordinates, {icon: activeIcon})
         .addTo(this._layerGroup);
+      }
     }
   }
 
