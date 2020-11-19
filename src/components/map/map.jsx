@@ -6,9 +6,7 @@ import {mapPins} from "../../const";
 
 class Map extends PureComponent {
   _setMap() {
-    const {offers, activeOfferId, nearbyOffers, mainOffer, coordinates, mapZoom} = this.props;
-    const activeOffer = offers.slice().filter((item) => item.id === +activeOfferId);
-    const otherOffers = offers.slice().filter((item) => item.id !== +activeOfferId);
+    const {offers, activeOfferId, mainOffer, coordinates, mapZoom} = this.props;
 
     const icon = leaflet.icon({
       iconUrl: mapPins.icon,
@@ -22,30 +20,23 @@ class Map extends PureComponent {
 
     this._map.flyTo(coordinates, mapZoom);
 
-    if (nearbyOffers && mainOffer) {
-      nearbyOffers.forEach((offer) => {
-        leaflet
-          .marker(offer.coordinates, {icon})
-          .addTo(this._layerGroup);
+    if (offers || mainOffer) {
+      console.log (mainOffer);
+      offers.forEach((offer) => {
+        if (offer.id === +activeOfferId) {
+          leaflet
+      .marker(offer.coordinates, {icon: activeIcon})
+      .addTo(this._layerGroup);
+        } else {
+          leaflet
+        .marker(offer.coordinates, {icon})
+        .addTo(this._layerGroup);
+        }
       });
 
       leaflet
         .marker(mainOffer.coordinates, {icon: activeIcon})
         .addTo(this._layerGroup);
-
-      return;
-    }
-
-    otherOffers.forEach((offer) => {
-      leaflet
-        .marker(offer.coordinates, {icon})
-        .addTo(this._layerGroup);
-    });
-
-    if (activeOffer.length) {
-      leaflet
-      .marker(activeOffer[0].coordinates, {icon: activeIcon})
-      .addTo(this._layerGroup);
     }
   }
 
@@ -64,7 +55,7 @@ class Map extends PureComponent {
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this._layerGroup);
+      .addTo(this._map);
 
     this._setMap();
   }
@@ -88,13 +79,11 @@ Map.propTypes = {
   activeOfferId: PropTypes.string.isRequired,
   mapZoom: PropTypes.number.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  nearbyOffers: PropTypes.arrayOf(PropTypes.object),
   mainOffer: PropTypes.object,
 };
 
-const mapStateToProps = ({ACTIONS, OFFERS}) => ({
-  activeOfferId: ACTIONS.activeOfferId,
-  offers: OFFERS.offers
+const mapStateToProps = ({ACTIONS}) => ({
+  activeOfferId: ACTIONS.activeOfferId
 });
 
 export {Map};

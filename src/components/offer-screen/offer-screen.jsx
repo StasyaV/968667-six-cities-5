@@ -170,7 +170,7 @@ class OfferScreen extends PureComponent {
               </div>
             </div>
             <Map mapClass={`property__map map`} mapZoom={offer.detailsMapZoom} coordinates={offer.coordinates}
-              mainOffer={offer} nearbyOffers={nearbyOffers}/>
+              mainOffer={offer} offers={nearbyOffers}/>
           </section>
           <div className="container">
             <section className="near-places places">

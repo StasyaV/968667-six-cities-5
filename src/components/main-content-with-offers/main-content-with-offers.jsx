@@ -51,7 +51,9 @@ const MainContentWithOffers = (props) => {
               changeFavoriteStatusAction={changeFavoriteStatusAction}/>
           </section>
           <div className="cities__right-section">
-            <Map mapClass={`cities__map map`} mapZoom={sortedOffers[0].сityZoom} coordinates={sortedOffers[0].cityCoordinates}/>
+            <Map mapClass={`cities__map map`}
+              mapZoom={sortedOffers[0].сityZoom} coordinates={sortedOffers[0].cityCoordinates}
+              offers={sortedOffers}/>
           </div>
         </div>
       </div>

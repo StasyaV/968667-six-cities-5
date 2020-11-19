@@ -18,6 +18,7 @@ const OfferCard = (props) => {
   const onTitleClick = () => {
     history.push(`/offer/${offer.id}`);
     updateActiveOfferIdAction(`${offer.id}`);
+    window.scrollY(0);
   };
 
   return (
