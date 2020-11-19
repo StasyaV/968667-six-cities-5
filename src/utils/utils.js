@@ -11,8 +11,8 @@ export const formatDate = (date) => {
 };
 
 export const sortCommentsByDate = (comments) => {
-  comments.slice().sort((a, b) => {
-    return moment(a.date, `DD.MM.YY`) - moment(b.date, `DD.MM.YY`);
+  return comments.slice().sort((a, b) => {
+    return b.date - a.date;
   });
 };
 

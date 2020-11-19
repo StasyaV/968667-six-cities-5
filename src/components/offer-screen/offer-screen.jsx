@@ -21,6 +21,15 @@ class OfferScreen extends PureComponent {
     this._getAdditionalData(loadNearbyOffersAction, offer.id);
   }
 
+  componentDidUpdate(prevProps) {
+    const {offer, loadCommentsAction, loadNearbyOffersAction} = this.props;
+
+    if (prevProps.offer.id !== this.props.offer.id) {
+      this._getAdditionalData(loadCommentsAction, offer.id);
+      this._getAdditionalData(loadNearbyOffersAction, offer.id);
+    }
+  }
+
   _getAdditionalData(func, id) {
     return func(id);
   }
