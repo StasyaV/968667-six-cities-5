@@ -9,6 +9,7 @@ Enzyme.configure({
 });
 const noop = () => {};
 
+window.scroll = noop;
 describe(`OfferCard works correct`, () => {
   it(`Should favorite button be pressed`, () => {
     const changeFavoriteStatusAction = jest.fn();

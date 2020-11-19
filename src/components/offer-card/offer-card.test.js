@@ -4,6 +4,7 @@ import OfferCard from "./offer-card";
 import {offers} from "../../mocks/offers";
 
 const noop = () => {};
+window.scroll = noop;
 describe(`OfferCard render`, () => {
   it(`Should OfferCard render correctly`, () => {
     const tree = renderer

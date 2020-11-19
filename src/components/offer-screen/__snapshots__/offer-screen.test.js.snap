@@ -40,7 +40,6 @@ exports[`OfferScreen render Should OfferScreen render correctly 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
                 onClick={[Function]}
               >
                 <div
