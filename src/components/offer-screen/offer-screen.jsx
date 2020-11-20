@@ -37,7 +37,7 @@ class OfferScreen extends PureComponent {
 
   render() {
     const {offer, comments, nearbyOffers, authorizationStatus,
-      changeFavoriteStatusAction, updateActiveOfferIdAction, email, loadNearbyOffersAction} = this.props;
+      changeFavoriteStatusAction, email, loadNearbyOffersAction} = this.props;
 
     const onFavoriteButtonClick = () => {
       if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -207,7 +207,6 @@ OfferScreen.propTypes = {
   loadNearbyOffersAction: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
-  updateActiveOfferIdAction: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired
 };
 

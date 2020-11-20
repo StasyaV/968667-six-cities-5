@@ -38,7 +38,7 @@ class FavoritesScreen extends PureComponent {
     };
 
     const onAccountLinkClick = () => {
-      history.push(`/favorite`);
+      history.push(`/favorites`);
     };
 
     return (
@@ -54,7 +54,7 @@ class FavoritesScreen extends PureComponent {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile" href="#">
+                    <a onClick={onAccountLinkClick} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{email}</span>
