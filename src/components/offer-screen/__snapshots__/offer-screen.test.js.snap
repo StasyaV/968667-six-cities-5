@@ -645,9 +645,7 @@ exports[`OfferScreen render Should OfferScreen render correctly 1`] = `
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
-                <a
-                  href="#"
-                >
+                <a>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -749,9 +747,7 @@ exports[`OfferScreen render Should OfferScreen render correctly 1`] = `
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
-                <a
-                  href="#"
-                >
+                <a>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -853,9 +849,7 @@ exports[`OfferScreen render Should OfferScreen render correctly 1`] = `
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
-                <a
-                  href="#"
-                >
+                <a>
                   <img
                     alt="Place image"
                     className="place-card__image"
@@ -957,9 +951,7 @@ exports[`OfferScreen render Should OfferScreen render correctly 1`] = `
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
-                <a
-                  href="#"
-                >
+                <a>
                   <img
                     alt="Place image"
                     className="place-card__image"

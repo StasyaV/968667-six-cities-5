@@ -7,7 +7,7 @@ const CommentList = (props) => {
   const {comments} = props;
   const getSortedComments = () => {
     if (comments.length > 0) {
-      return sortCommentsByDate(comments);
+      return sortCommentsByDate(comments).length > 10 ? sortCommentsByDate(comments).slice(0, 10) : sortCommentsByDate(comments);
     }
     return comments;
   };

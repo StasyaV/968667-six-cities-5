@@ -195,9 +195,7 @@ exports[`MainContentWithOffers render Should MainContentWithOffers render correc
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
-              <a
-                href="#"
-              >
+              <a>
                 <img
                   alt="Place image"
                   className="place-card__image"
@@ -299,9 +297,7 @@ exports[`MainContentWithOffers render Should MainContentWithOffers render correc
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
-              <a
-                href="#"
-              >
+              <a>
                 <img
                   alt="Place image"
                   className="place-card__image"
@@ -403,9 +399,7 @@ exports[`MainContentWithOffers render Should MainContentWithOffers render correc
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
-              <a
-                href="#"
-              >
+              <a>
                 <img
                   alt="Place image"
                   className="place-card__image"
@@ -507,9 +501,7 @@ exports[`MainContentWithOffers render Should MainContentWithOffers render correc
             <div
               className="cities__image-wrapper place-card__image-wrapper"
             >
-              <a
-                href="#"
-              >
+              <a>
                 <img
                   alt="Place image"
                   className="place-card__image"

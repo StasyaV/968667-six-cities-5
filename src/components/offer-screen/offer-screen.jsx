@@ -50,9 +50,10 @@ class OfferScreen extends PureComponent {
 
     const onAccountLinkClick = () => {
       if (authorizationStatus === AuthorizationStatus.AUTH) {
-        history.push(`/favorite`);
+        history.push(`/favorites`);
+      } else {
+        history.push(`/login`);
       }
-      history.push(`/login`);
     };
 
     return (
@@ -187,7 +188,7 @@ class OfferScreen extends PureComponent {
                   changeFavoriteStatusAction={(id, num) => {
                     changeFavoriteStatusAction(id, num);
                     this._getAdditionalData(loadNearbyOffersAction, offer.id);
-                  }} updateActiveOfferIdAction={updateActiveOfferIdAction}/>
+                  }} />
               </div>
             </section>
           </div>

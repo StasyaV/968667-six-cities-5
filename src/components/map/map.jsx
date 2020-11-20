@@ -20,24 +20,24 @@ class Map extends PureComponent {
 
     this._map.flyTo(coordinates, mapZoom);
 
-    if (offers) {
-      offers.forEach((offer) => {
-        if (offer.id === +activeOfferId) {
-          leaflet
-      .marker(offer.coordinates, {icon: activeIcon})
-      .addTo(this._layerGroup);
-        } else {
-          leaflet
-        .marker(offer.coordinates, {icon})
-        .addTo(this._layerGroup);
-        }
-      });
 
-      if (mainOffer) {
-        leaflet
+    if (mainOffer) {
+      leaflet
         .marker(mainOffer.coordinates, {icon: activeIcon})
         .addTo(this._layerGroup);
-      }
+
+      offers.forEach((offer) => {
+        leaflet
+          .marker(offer.coordinates, {icon})
+          .addTo(this._layerGroup);
+      });
+      return;
+    } else if (offers) {
+      offers.forEach((offer) => {
+        leaflet
+          .marker(offer.coordinates, {icon: (offer.id === +activeOfferId ? activeIcon : icon)})
+          .addTo(this._layerGroup);
+      });
     }
   }
 
