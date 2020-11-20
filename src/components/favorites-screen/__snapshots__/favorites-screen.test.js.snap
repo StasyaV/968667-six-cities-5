@@ -40,7 +40,6 @@ exports[`FavoritesScreen render Should FavoritesScreen render correctly 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
                 onClick={[Function]}
               >
                 <div
@@ -540,7 +539,6 @@ exports[`FavoritesScreen render Should FavoritesScreen without offers render cor
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
                 onClick={[Function]}
               >
                 <div
