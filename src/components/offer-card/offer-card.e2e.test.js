@@ -27,21 +27,4 @@ describe(`OfferCard works correct`, () => {
     favoriteButton.simulate(`click`);
     expect(changeFavoriteStatusAction).toHaveBeenCalledTimes(1);
   });
-
-  it(`Should title link be clicked`, () => {
-    const updateActiveOfferIdAction = jest.fn();
-
-    const wrapper = shallow(
-        <OfferCard
-          offer={offers[0]}
-          authorizationStatus={`AUTH`}
-          changeFavoriteStatusAction={noop}
-          updateActiveOfferIdAction={updateActiveOfferIdAction}
-        />
-    );
-
-    const offerLink = wrapper.find(`.place-card__name > a`);
-    offerLink.simulate(`click`);
-    expect(updateActiveOfferIdAction).toHaveBeenCalledTimes(1);
-  });
 });
