@@ -10,6 +10,8 @@ import {offers, comments} from "../../mocks/offers";
 const mockStore = configureStore([]);
 const noop = () => {};
 
+jest.mock(`moment`, () => () => ({format: () => `May 08`}));
+
 describe(`OfferScreen render`, () => {
   const initialState = {
     CITIES: {
@@ -30,7 +32,6 @@ describe(`OfferScreen render`, () => {
 
   const store = mockStore(initialState);
   it(`Should OfferScreen render correctly`, () => {
-    jest.mock(`moment`, () => () => ({format: () => `May 08`}));
     const tree = renderer
     .create(
         <Provider store={store}>
