@@ -46,6 +46,7 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for loadComments returns correct action`, () => {
+    jest.mock(`moment`, () => () => ({format: () => `May 08`}));
     expect(loadComments(comments)).toEqual({
       type: ActionType.LOAD_COMMENTS,
       payload: comments
